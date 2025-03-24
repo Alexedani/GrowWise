@@ -1,0 +1,48 @@
+/* Header.css */
+/* This file defines the styling for the main header bar*/
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main Header Style */
+.mainHeader {
+    display: flex;
+    justify-content: space-between; /* Space between the left, center, and right items */
+    align-items: center; /* Vertically centers the items */
+    padding: 10px 20px;
+    border: 2px solid #ccc; /* Adds a 2px solid border with a light gray color */
+    border-radius: 8px; /* Optional: Rounded corners for the border */
+}
+
+/* Left-aligned coins label */
+.coinsLabel {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+/* Centered page title (h1) */
+.pageNameLabel {
+    flex-grow: 1; /* This makes sure the h1 grows and takes up available space */
+    text-align: center;
+    font-size: 24px;
+}
+
+/* Navigation bar on the right */
+.HeaderNav {
+    display: flex;
+    justify-content: flex-end; /* Aligns the nav items to the right */
+}
+
+.HeaderNav a {
+    margin-left: 15px; /* Space between icons */
+}
+
+.HeaderNav img {
+    width: 30px; /* Set a fixed size for the icons */
+    height: 30px;
+    object-fit: contain; /* Ensures the images maintain aspect ratio */
+}
