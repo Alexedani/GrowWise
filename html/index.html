@@ -7,14 +7,49 @@
 </head>
 
 <body>
-    <h1 style="text-align: center;">Login</h1>
-    <label>Enter email address: </label>
-    <input></input>
+    <!--Makes sure that the user enters something into the input fields-->
+    <script>
+
+        function validateInput(){
+            const emailInput = document.getElementById("email");
+            const nameInput = document.getElementById("name");
+            const warningLabel = document.getElementById("warning");
+
+            const usernameRegex = /^[a-zA-Z0-9]{1,16}$/; 
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+
+            if (emailInput.value === "" || nameInput.value === "") {
+                warningLabel.innerText = "Please enter a username and email to begin.";
+                return;
+            }
+
+            if (!usernameRegex.test(nameInput.value)) {
+                warningLabel.innerText = "Username must be 1-16 characters long and contain only letters and numbers.";
+                return;
+            }
+
+            if (!emailRegex.test(emailInput.value)) {
+                warningLabel.innerText = "Please enter a valid email address.";
+                return;
+            }
+
+            window.location.href = 'home.html';
+        }
+
+    </script>
+
+    <h1 style="text-align: center;">Welcome!</h1>
+
+    <label >Enter email address: </label>
+    <input id="email"></input>
     <br><br>
     <label>Enter Nickname: </label>
-    <input></input>
+    <input id="name"></input>
     <br><br>
-    <button>Submit</button>
+
+    <button onclick="validateInput()">Login</button>
+    <label id="warning" style="color: red;"></label>
+
 </body>
 
 </html>
