@@ -73,3 +73,9 @@ body {
     transform: scale(1.08); /* Slightly more zoom on hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More prominent shadow on hover */
 }
+
+.audio {
+    font-size: 16px;
+  }
+  
+  
