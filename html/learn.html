@@ -4,20 +4,76 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="../css/header.css">
+        <link rel="stylesheet" href="../css/main.css">
         <script src="/js/user.js"></script>
     </head>
 <body>
-    <!--Header-->
     <header class="mainHeader">
-        <nav class="HeaderNav">
-            <a href="home.html"><img src="../images/home.png" alt="home"></a>
-            <a href="settings.html"><img src="../images/settings.png" alt="settings"></a>
-            <a href="profile.html"><img src="../images/profile.png" alt="profile"></a>
-        </nav>
-        <h1 class="pageNameLabel">Learn</h1>
-        <label class="coinsLabel" id="coins">Coins: </label>
-    </header>
+    <nav class="HeaderNav">
+        <a href="home.html"><img src="../images/home.png" alt="home"></a>
+        <!-- <a href="settings.html"><img src="../images/settings.png" alt="settings"></a> -->
+        <a href="#" id="settings-btn">
+            <img src="../images/settings.png" alt="settings">
+        </a>
+        
+        <div id="settings-dropdown" class="settings-dropdown hidden">
+            <!-- Settings Header -->
+            <div class="settings-header">
+                <strong>Settings</strong>
+            </div>
+        
+            <!-- Audio toggle icon -->
+            <label id="audio-toggle-label">
+                <img src="../images/audio_off.png" alt="audio off" id="audio-icon">
+                <span id="audio-status">Audio Off</span>
+            </label>
+        </div>
+        <a href="profile.html"><img src="../images/profile.png" alt="profile"></a>
+    </nav>
+    <h1 class="pageNameLabel">Learn</h1>
+    <label class="coinsLabel" id="coins">Coins: </label>
+</header>
+    <!-- Main Content: Cards for Subjects -->
+    <section class="card-container">
+        <!-- Card 1: Math -->
+        <div class="card">
+            <img src="../images/math_img.avif" alt="Math">
+            <h2>Math Magicians</h2>
+            <p>Become a math wizard with fun math activities!</p>
+            <a href="math.html" class="btn">Explore</a>
+        </div>
+
+        <!-- Card 2: Science -->
+        <div class="card">
+            <img src="../images/shapes.jpg" alt="Science">
+            <h2>Shape Explorers</h2>
+            <p>Discover the world of shapes!</p>
+            <a href="shapes.html" class="btn">Explore</a>
+        </div>
+
+        <!-- Card 3: History -->
+        <div class="card">
+            <img src="../images/letter_img.webp" alt="History">
+            <h2>Letterland Adventures
+            </h2>
+            <p>Explore the magical world of letters and words!</p>
+            <a href="letter.html" class="btn">Explore</a>
+        </div>
+
+        <!-- Card 3: History -->
+        <div class="card">
+            <img src="../images/veggies.jpg" alt="History">
+            <h2>Fruity and Veggie Friends</h2>
+            <p>Learn about fruits and vegetables!</p>
+            <a href="history.html" class="btn">Explore</a>
+        </div>
+
+        <!-- Add more cards for other subjects here -->
+    </section>
+
+
+<script src="../js/main.js"></script>
     
 </body>
 </html>

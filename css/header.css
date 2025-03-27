@@ -10,9 +10,17 @@
 .mainHeader {
     display: flex;
     justify-content: space-between; 
+    background-color: white;
     align-items: center; 
-    padding: 10px 20px;
+    padding: 20px 20px;
     border-bottom: 2px solid #0a0909;
+    z-index: 1000;
+    position: fixed; /* Fixes the navbar at the top */
+    top: 0;  /* Sticks the navbar to the top of the screen */
+    left: 0; /* Aligns the navbar to the left of the page */
+    width: 100%; /* Ensures the navbar stretches across the full width of the page */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow below navbar */
+    height: 80px;  
 }
 
 .coinsLabel {
@@ -30,6 +38,8 @@
 .HeaderNav {
     display: flex;
     justify-content: flex-end; 
+    position: relative; 
+
 }
 
 .HeaderNav a {
@@ -42,4 +52,47 @@
     width: 30px; 
     height: 30px;
     object-fit: contain; 
+}
+
+/* for setting button  */
+
+.settings-btn {
+    cursor: pointer; /* Change the cursor to pointer for the button */
+}
+
+.settings-dropdown {
+    position: absolute;
+    top: 100%; /* Position it right below the settings button */
+    left: 0;  /* Align it to the left edge of the settings button */
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+}
+
+.hidden {
+    display: none;
+}
+
+.settings-dropdown.show {
+    display: block;
+}
+
+#audio-toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#audio-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+#audio-status {
+    font-size: 14px;
+    color: #333;
 }

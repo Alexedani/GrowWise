@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
@@ -12,12 +13,51 @@
     <header class="mainHeader">
         <nav class="HeaderNav">
             <a href="home.html"><img src="../images/home.png" alt="home"></a>
-            <a href="settings.html"><img src="../images/settings.png" alt="settings"></a>
+            <!-- <a href="settings.html"><img src="../images/settings.png" alt="settings"></a> -->
+            <a href="#" id="settings-btn">
+                <img src="../images/settings.png" alt="settings">
+            </a>
+            
+            <div id="settings-dropdown" class="settings-dropdown hidden">
+                <!-- Settings Header -->
+                <div class="settings-header">
+                    <strong>Settings</strong>
+                </div>
+            
+                <!-- Audio toggle icon -->
+                <label id="audio-toggle-label">
+                    <img src="../images/audio_off.png" alt="audio off" id="audio-icon">
+                    <span id="audio-status">Audio Off</span>
+                </label>
+            </div>
             <a href="profile.html"><img src="../images/profile.png" alt="profile"></a>
         </nav>
         <h1 class="pageNameLabel">Grow Wise</h1>
         <label class="coinsLabel" id="coins">Coins: </label>
     </header>
+        <!-- Main Content: Centered Cards -->
+        <section class="card-container">
+            <div class="card">
+                <img src="../images/kidslearn.png" alt="Learn">
+                <h2>Learn</h2>
+                <p>Enhance your knowledge with interactive lessons.</p>
+                <a href="learn.html" class="btn">Explore</a>
+            </div>
+            <div class="card">
+                <img src="../images/kidsgrow.webp" alt="Grow">
+                <h2>Grow</h2>
+                <p>Track your progress and improve your skills.</p>
+                <a href="quizzes.html" class="btn">Get Started</a>
+            </div>
+            <div class="card">
+                <img src="../images/shopforkids.png" alt="Shop">
+                <h2>Shop</h2>
+                <p>Redeem rewards and unlock new features.</p>
+                <a href="shop.html" class="btn">Shop Now</a>
+            </div>
+        </section>
+    <!-- Link JavaScript file -->
+    <script src="../js/main.js"></script>
 
 </body>
 </html>
