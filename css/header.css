@@ -1,6 +1,5 @@
 /* Header.css */
 /* This file defines the styling for the main header bar*/
-
 * {
     margin: 0;
     padding: 0;
@@ -95,4 +94,37 @@
 #audio-status {
     font-size: 14px;
     color: #333;
+}
+
+/* --- Back to Learn Page Button --- */
+.back-link {
+    display: inline-flex; /* Use inline-flex to align items horizontally */
+    align-items: center; /* Vertically center the image and text */
+    padding: 8px 16px; /* Padding for the button */
+    background-color: #ffffff; /* White background for a clean look */
+    color: #333333; /* Dark gray text for contrast */
+    font-size: 14px; /* Font size for the text */
+    font-weight: 600; /* Medium weight font for better readability */
+    border-radius: 6px; /* Slightly rounded corners */
+    text-decoration: none; /* Remove default text underline */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.back-img {
+    width: 20px; /* Set a fixed width for the image */
+    height: 20px; /* Set a fixed height for the image */
+    margin-right: 8px; /* Space between the image and text */
+}
+
+.back-link:hover {
+    background-color: #f2f2f2; /* Light gray background on hover */
+    color: #c0392b; /* Red text color on hover */
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+.back-link:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 2px #c0392b; /* Red outline on focus */
 }

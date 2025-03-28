@@ -1,8 +1,9 @@
-body {
-    background-image: url('../images/img.webp');  /* Use an engaging, playful background image */
+/* Apply background image only to learn.html and home.html */
+.background-image {
+    background-image: url('../images/img.webp'); 
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed; /* Makes the background move as you scroll */
+    background-attachment: fixed;
     font-family: 'Arial', sans-serif;
 }
 
@@ -73,9 +74,3 @@ body {
     transform: scale(1.08); /* Slightly more zoom on hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More prominent shadow on hover */
 }
-
-.audio {
-    font-size: 16px;
-  }
-  
-  

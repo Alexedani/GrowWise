@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Wizards</title>
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+</head>
+<body>
+  <!-- Navbar (unchanged) -->
+  <header class="mainHeader">
+    <nav class="HeaderNav">
+      <a href="home.html"><img src="../images/home.png" alt="Home" /></a>
+      <a href="#" id="settings-btn">
+        <img src="../images/settings.png" alt="Settings" />
+      </a>
+      <div id="settings-dropdown" class="settings-dropdown hidden">
+        <div class="settings-header"><strong>Settings</strong></div>
+        <label id="audio-toggle-label">
+          <img src="../images/audio_off.png" alt="Audio Off" id="audio-icon" />
+          <span id="audio-status">Audio Off</span>
+        </label>
+      </div>
+      <a href="profile.html"><img src="../images/profile.png" alt="Profile" /></a>
+      <a href="learn.html" class="back-link">
+        <img src="../images/back.jpg" alt="Back to Learn" />
+        <span>Back</span>
+      </a>
+    </nav>
+    <h1 class="pageNameLabel">Explore the contents of Math</h1>
+    <label class="coinsLabel" id="coins">Coins: </label>
+  </header>
+
+  <!-- Main Container: Left Sidebar (Accordion) and an optional right section -->
+  <div class="main-container">
+    <!-- Left Sidebar: Accordion for Difficulty Levels -->
+    <div class="sidebar">
+      <!-- Accordion for Easy -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion('easy')">Easy</div>
+        <div id="easy" class="accordion-content">
+          <ul class="content-list">
+            <li onclick="showContent('easy1')">Basic Addition</li>
+            <li onclick="showContent('easy2')">Subtraction Practice</li>
+            <li onclick="showContent('easy3')">Counting Numbers</li>
+          </ul>
+          <div id="easy1" class="content-detail hidden">
+            <p>This is the content for Basic Addition...</p>
+          </div>
+          <div id="easy2" class="content-detail hidden">
+            <p>This is the content for Subtraction Practice...</p>
+          </div>
+          <div id="easy3" class="content-detail hidden">
+            <p>This is the content for Counting Numbers...</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Accordion for Medium -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion('medium')">Medium</div>
+        <div id="medium" class="accordion-content">
+          <ul class="content-list">
+            <li onclick="showContent('medium1')">Multiplication</li>
+            <li onclick="showContent('medium2')">Division</li>
+          </ul>
+          <div id="medium1" class="content-detail hidden">
+            <p>This is the content for Multiplication...</p>
+          </div>
+          <div id="medium2" class="content-detail hidden">
+            <p>This is the content for Division...</p>
+          </div>
+          <div id="medium3" class="content-detail hidden">
+            <p>This is the content for Word Problems...</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Accordion for Difficult -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion('difficult')">Difficult</div>
+        <div id="difficult" class="accordion-content">
+          <ul class="content-list">
+            <li onclick="showContent('difficult1')">Algebra</li>
+            <li onclick="showContent('difficult2')">Geometry</li>
+            <li onclick="showContent('difficult3')">Trigonometry</li>
+          </ul>
+          <div id="difficult1" class="content-detail hidden">
+            <p>This is the content for Algebra...</p>
+          </div>
+          <div id="difficult2" class="content-detail hidden">
+            <p>This is the content for Geometry...</p>
+          </div>
+          <div id="difficult3" class="content-detail hidden">
+            <p>This is the content for Trigonometry...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional Right Section (if needed for additional content) -->
+    <div class="right-section">
+      <!-- Other content could go here -->
+    </div>
+  </div>
+
+  <script>
+    // Toggle an accordion section open/closed
+    function toggleAccordion(sectionId) {
+      const content = document.getElementById(sectionId);
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+      } else {
+        content.style.display = 'block';
+      }
+    }
+
+    // Show a specific content detail within the open accordion section
+    function showContent(contentId) {
+      // Find the parent container of this content detail
+      const container = document.getElementById(contentId).parentElement;
+      // Hide all content details in that container
+      const details = container.querySelectorAll('.content-detail');
+      details.forEach(detail => {
+        detail.classList.add('hidden');
+      });
+      // Show the selected content detail
+      document.getElementById(contentId).classList.remove('hidden');
+    }
+
+    // Optionally, open the 'Easy' section by default
+    window.onload = function() {
+      document.getElementById('easy').style.display = 'block';
+    };
+  </script>
+</body>
+</html>
