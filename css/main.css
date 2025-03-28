@@ -74,3 +74,93 @@
     transform: scale(1.08); /* Slightly more zoom on hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More prominent shadow on hover */
 }
+
+.audio {
+    font-size: 16px;
+  }
+  
+
+/* for each of the subjects  page  */
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    padding-top: 80px;
+  }
+  
+  /* Main container: two columns */
+  .main-container {
+    display: flex;
+    height: calc(100vh - 80px); /* full height minus header */
+  }
+  
+  /* Left Sidebar: holds the accordion tabs */
+  .sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Accordion header styling */
+  .accordion-header {
+    background-color: green;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .accordion-header:hover {
+    background-color: #1fa7d4;
+  }
+  
+  /* Accordion content styling (initially hidden) */
+  .accordion-content {
+    display: none; /* hidden by default */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    max-height: 300px; /* scroll if content is long */
+    overflow-y: auto;
+  }
+  
+  /* Content list inside each accordion section */
+  .content-list ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+  
+  .content-list li {
+    margin: 5px 0;
+    cursor: pointer;
+  }
+  
+  /* Content detail styling */
+  .content-detail {
+    display: none;
+    margin-top: 10px;
+  }
+  
+  .content-detail.hidden {
+    display: none;
+  }
+  
+  .content-detail p {
+    margin: 10px 0;
+  }
+  
+  /* Optional Right Section: occupies remaining space */
+  .right-section {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+>>>>>>> e853d1e (updated math page)
+  
