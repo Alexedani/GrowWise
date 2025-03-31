@@ -1,57 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="/css/header.css">
-        <script src="/js/user.js"></script>
-    </head>
-<body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body class="background-image1">
     <!--Header-->
     <header class="mainHeader">
         <nav class="HeaderNav">
-            <a href="home.html"><img src="/images/home.png" alt="home"></a>
-            <a href="settings.html"><img src="/images/settings.png" alt="settings"></a>
-            <a href="profile.html"><img src="/images/profile.png" alt="profile"></a>
+            <a href="home.html"><img src="../images/home.png" alt="home"></a>
+            <!-- <a href="settings.html"><img src="../images/settings.png" alt="settings"></a> -->
+            <a href="#" id="settings-btn">
+                <img src="../images/settings.png" alt="settings">
+            </a>
+            
+            <div id="settings-dropdown" class="settings-dropdown hidden">
+                <!-- Settings Header -->
+                <div class="settings-header">
+                    <strong>Settings</strong>
+                </div>
+            
+                <!-- Audio toggle icon -->
+                <label id="audio-toggle-label">
+                    <img src="../images/audio_off.png" alt="audio off" id="audio-icon">
+                    <span id="audio-status">Audio Off</span>
+                </label>
+            </div>
+            <a href="profile.html"><img src="../images/profile.png" alt="profile"></a>
         </nav>
         <h1 class="pageNameLabel">Quizzes</h1>
         <label class="coinsLabel" id="coins">Coins: </label>
     </header>
+        <!-- Main Content: Centered Cards -->
+        <section class="card-container">
+            <div class="card">
+                <img src="../images/uscapitals.jpg" alt="uscapitals">
+                <h2>US States and capitals</h2>
+                <p>Ready to test your brainpower? Let’s begin!"</p>
+                <a href="" class="btn">Play Quiz</a>
+            </div>
+            <div class="card">
+                <img src="../images/trafficlaws.png" alt="trafficlaws">
+                <h2>Traffic Laws</h2>
+                <p>Buckle up! It's time to test your traffic knowledge!</p>
+                <a href="" class="btn">Play Quiz</a>
+            </div>
+            <div class="card">
+                <img src="../images/fruitsimg.jpg" alt="fruitsimg">
+                <h2>Fruits</h2>
+                <p>Get ready to play the fruity quiz! Can you guess them all?</p>
+                <a href="" class="btn">Play Quiz</a>
+            </div>
+        </section>
+    <!-- Link JavaScript file -->
+    <script src="../js/main.js"></script>
 
-    <main>
-        <h2>Match the letter to the Pictures</h2>
-    
-        <div class="quiz-content">
-          <div class="item">
-            <img src="apple.png" alt="Apple" />
-            <p>Apple</p>
-          </div>
-    
-          <div class="item">
-            <img src="cat.png" alt="Cat" />
-            <p>Cat</p>
-          </div>
-    
-          <div class="item">
-            <img src="ant.png" alt="Ant" />
-            <p>Ant</p>
-          </div>
-    
-          <div class="letter-icon">
-            <img src="letter-a.png" alt="Letter A" />
-          </div>
-        </div>
-    
-        <div class="actions">
-          <button class="check-btn">Check Answers</button>
-         
-          <div class="progress-container">
-            <div class="progress-bar"></div>
-            <span>Progress</span>
-          </div>
-        </div>
-      </main>
-    
 </body>
 </html>
