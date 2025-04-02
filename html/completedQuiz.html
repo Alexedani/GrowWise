@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+    <link rel="stylesheet" href="../css/completedQuiz.css">
+</head>
+<body class="background-image1">
+    <div class="results-container">
+        <h1>Quiz Completed!</h1>
+        <p id="score-message"></p>
+        <button onclick="window.location.href='quizzes.html'" class="btn">Back to Quizzes</button>
+    </div>
+
+    <script>
+        // get the score from the URL 
+        const urlParams = new URLSearchParams(window.location.search);
+        const score = urlParams.get("score");
+        const total = urlParams.get("total");
+        const percentage = urlParams.get("percentage");
+
+        // Display results
+        const scoreMessage = document.getElementById("score-message");
+        
+        if (percentage >= 50) {
+            scoreMessage.textContent = `Congratulations! You scored ${score} out of ${total} (${percentage}%). Great job!`;
+        } else {
+            scoreMessage.textContent = `Almost there! You scored ${score} out of ${total} (${percentage}%). Keep practicing and try again!`;
+            // change the text color to red
+            // this can be changed if you guys think this is too harsh 
+            // @anup, @rista 
+            scoreMessage.style.color = "red";
+
+        }
+    </script>
+</body>
+</html>

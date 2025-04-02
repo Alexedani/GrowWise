@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body class="background-image1">
+    <!--Header-->
+    <header class="mainHeader">
+        <nav class="HeaderNav">
+            <a href="home.html"><img src="/images/home.png" alt="home"></a>
+            <a href="settings.html"><img src="/images/settings.png" alt="settings"></a>
+            <a href="profile.html"><img src="/images/profile.png" alt="profile"></a>
+        </nav>
+        <h1 class="pageNameLabel">Profile</h1>
+        <label class="coinsLabel" id="coins">Coins: </label>
+    </header>
+
+    <!-- Quiz Section -->
+    <section class="quiz-container">
+        <div id="quiz">
+            <h2 id="question">Question will appear here</h2>
+            <div id="answers">
+                <!-- Answer buttons will be dynamically added here -->
+            </div>
+        </div>
+        <button id="next-btn" class="btn hidden">Next Question</button>
+    </section>
+
+    <!-- Link JavaScript file -->
+    <script src="../js/quiz.js"></script>
+</body>
+</html>
