@@ -1,3 +1,15 @@
+/* quiz.js 
+   this file handles the logic for 
+   quiz.html where the user will select
+   a quiz which will match to one of the quizzes
+   the datasctructure quizzes hold all the quizzes, 
+   questions, and answers.
+   
+   to add a new quiz and questions, just modify
+   the quiz data scructure and add your quiz name 
+   and questions below*/
+
+
 // questions for each quiz
 const quizzes = {
     uscapitals: [
@@ -10,6 +22,7 @@ const quizzes = {
         { question: "What does a red traffic light mean?", answers: ["Stop", "Go", "Yield", "Slow Down"], correct: 0 },
         { question: "What shape is a stop sign?", answers: ["Octagon", "Circle", "Triangle", "Square"], correct: 0 },
     ],
+    
     fruits: [
         { question: "Which fruit is known as the king of fruits?", answers: ["Mango", "Apple", "Banana", "Pineapple"], correct: 0 },
         { question: "Which fruit is red and often associated with love?", answers: ["Strawberry", "Apple", "Cherry", "Pomegranate"], correct: 0 },
