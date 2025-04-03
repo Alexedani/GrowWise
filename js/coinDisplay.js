@@ -1,17 +1,20 @@
-// this updates the coins in the header
-// for all pages
 function updateCoinsDisplay() {
-
     const user = JSON.parse(sessionStorage.getItem('user'));
-
-    // Update the coins display if user data exists
     if (user && user.coins !== undefined) {
+        // Update header coins display
         const coinsLabel = document.getElementById('coins');
-        coinsLabel.textContent = `Coins: ${user.coins}`;
+        if (coinsLabel) {
+            coinsLabel.textContent = `Coins: ${user.coins}`;
+        }
+        // Update coins in the statistics section if it exists
+        const statsCoins = document.getElementById('stats-coins');
+        if (statsCoins) {
+            statsCoins.textContent = user.coins;
+        }
     } else {
         console.error('User data not found in sessionStorage.');
     }
 }
 
-
-updateCoinsDisplay();
+// Wait for the DOM to be fully loaded before updating
+document.addEventListener("DOMContentLoaded", updateCoinsDisplay);

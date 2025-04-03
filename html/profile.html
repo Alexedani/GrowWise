@@ -1,25 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/header.css">
-    <script src="/js/user.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
-    <!--Header-->
-    <header class="mainHeader">
-        <nav class="HeaderNav">
-            <a href="home.html"><img src="/images/home.png" alt="home"></a>
-            <a href="settings.html"><img src="/images/settings.png" alt="settings"></a>
-            <a href="profile.html"><img src="/images/profile.png" alt="profile"></a>
-        </nav>
-        <h1 class="pageNameLabel">Profile</h1>
-        <label class="coinsLabel" id="coins">Coins: </label>
-        <script src="../js/coinDisplay.js"></script>
-    </header>
+  <!-- Header -->
+  <header class="mainHeader">
+    <nav class="HeaderNav">
+      <a href="home.html"><img src="/images/home.png" alt="home"></a>
+      <a href="settings.html"><img src="/images/settings.png" alt="settings"></a>
+      <a href="profile.html"><img src="/images/profile.png" alt="profile"></a>
+    </nav>
+    <h1 class="pageNameLabel">Profile</h1>
+    <!-- Remove the hardcoded coin value -->
+    <label class="coinsLabel" id="coins">Coins: </label>
+    <script src="../js/coinDisplay.js"></script>
+  </header>
 
+  <!-- Profile Container -->
+  <section class="profile-container">
+    <!-- Current Profile Information Display -->
+    <div class="profile-display">
+      <h2>Current Profile</h2>
+      <div class="display-info">
+        <div class="avatar-preview">
+          <img id="displayAvatar" src="../images/current-avatar.png" alt="Current Avatar">
+        </div>
+        <div class="info-details">
+          <p><strong>Nickname:</strong> <span id="currentNickname">CurrentNickname</span></p>
+          <p id="currentBiography">This is your current biography. Update it in the form on the right.</p>
+        </div>
+      </div>
+      <!-- Statistics -->
+      <div class="stats">
+        <h3>Your Statistics</h3>
+        <ul>
+          <li><strong>Coins Earned:</strong> <span id="stats-coins"></span></li>
+          <li><strong>Lessons Completed:</strong> 25</li>
+          <li><strong>Quizzes Completed:</strong> 10</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Update Profile Form -->
+    <div class="profile-edit">
+      <h2>Update Profile</h2>
+      <form id="updateProfileForm">
+        <div class="form-group">
+          <label for="nickname">Nickname:</label>
+          <input type="text" id="nickname" name="nickname" placeholder="Enter new nickname">
+        </div>
+        <div class="form-group avatar-section">
+          <label>Avatar:</label>
+          <div class="avatar-actions">
+            <div class="avatar-preview">
+              <img id="editAvatarPreview" src="../images/current-avatar.png" alt="Current Avatar">
+            </div>
+            <input type="file" id="avatar" name="avatar" accept="image/*">
+            <a href="shop.html" class="customize-button">Customize Avatar</a>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea id="biography" name="biography" placeholder="Tell something interesting about you"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Modal Popup for Update Confirmation -->
+  <div id="updateModal" class="modal">
+    <div class="modal-content">
+      <p>Your changes have been updated!</p>
+      <button id="closeModal">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Load user data from sessionStorage when the DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      let user = JSON.parse(sessionStorage.getItem("user"));
+      if (user) {
+        // Update profile display if stored values exist
+        if (user.nickname) {
+          document.getElementById("currentNickname").textContent = user.nickname;
+          document.getElementById("nickname").value = user.nickname;
+        }
+        if (user.biography) {
+          document.getElementById("currentBiography").textContent = user.biography;
+          document.getElementById("biography").value = user.biography;
+        }
+        if (user.avatar) {
+          document.getElementById("displayAvatar").src = user.avatar;
+          document.getElementById("editAvatarPreview").src = user.avatar;
+        }
+      } else {
+        // Set default user object if not already in sessionStorage
+        user = {
+          coins: 0,
+          nickname: "CurrentNickname",
+          biography: "This is your current biography. Update it in the form on the right.",
+          avatar: "../images/current-avatar.png"
+        };
+        sessionStorage.setItem("user", JSON.stringify(user));
+      }
+    });
+
+    // Update profile form submission
+    const updateForm = document.getElementById('updateProfileForm');
+    updateForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Retrieve the current user data from sessionStorage or initialize if not present
+      let user = JSON.parse(sessionStorage.getItem("user")) || {};
+
+      // Get new values from form inputs
+      const newNickname = document.getElementById('nickname').value.trim();
+      const newBiography = document.getElementById('biography').value.trim();
+      const avatarInput = document.getElementById('avatar');
+      
+      // Update user object and display values if input is not empty
+      if (newNickname !== '') {
+        user.nickname = newNickname;
+        document.getElementById("currentNickname").textContent = newNickname;
+      }
+      
+      if (newBiography !== '') {
+        user.biography = newBiography;
+        document.getElementById("currentBiography").textContent = newBiography;
+      }
+      
+      // Update avatar if a new file is selected
+      if (avatarInput.files && avatarInput.files[0]) {
+        const file = avatarInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          user.avatar = e.target.result;
+          document.getElementById("displayAvatar").src = e.target.result;
+          document.getElementById("editAvatarPreview").src = e.target.result;
+          // Save the updated user object in sessionStorage after the avatar loads
+          sessionStorage.setItem("user", JSON.stringify(user));
+        }
+        reader.readAsDataURL(file);
+      } else {
+        // If no new avatar, immediately save the updated user data
+        sessionStorage.setItem("user", JSON.stringify(user));
+      }
+      
+      avatarInput.value = '';
+      
+      document.getElementById("updateModal").style.display = "block";
+    });
     
+    document.getElementById('closeModal').addEventListener('click', function() {
+      document.getElementById('updateModal').style.display = 'none';
+    });
+  </script>
 </body>
 </html>
