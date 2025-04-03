@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const settingsDropdown = document.getElementById("settings-dropdown");
     const audioIcon = document.getElementById("audio-icon");
     const audioStatus = document.getElementById("audio-status");
+    const logoutBtn = document.getElementById("logout-btn"); // Get logout button
 
     if (!settingsBtn || !settingsDropdown || !audioIcon || !audioStatus) {
         console.error("Settings button or dropdown or audio elements not found!");
@@ -37,14 +38,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add event listeners for both icon and text
     audioIcon.addEventListener("click", toggleAudio); 
     audioStatus.addEventListener("click", toggleAudio); 
+
     // Close the settings dropdown when clicking anywhere outside the dropdown or settings button
     document.addEventListener("click", function (event) {
-        // If the clicked target is not the settings button or inside the dropdown
         if (!settingsBtn.contains(event.target) && !settingsDropdown.contains(event.target)) {
             settingsDropdown.classList.remove("show");
         }
     });
-    
+
+    // Logout function
+    function logoutUser() {
+        console.log("Logging out..."); // Debugging
+        sessionStorage.removeItem("user"); // Clear session storage
+        window.location.href = "index.html"; // Redirect to login page
+    }
+
+    // Ensure logout button exists before adding event listener
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", logoutUser);
+    } else {
+        console.error("Logout button not found!");
+    }
 });
-
-

@@ -128,3 +128,18 @@
     outline: none; /* Remove default focus outline */
     box-shadow: 0 0 0 2px #c0392b; /* Red outline on focus */
 }
+#logout-btn {
+    padding: 10px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  #logout-btn:hover {
+    background-color: #c82333;
+  }

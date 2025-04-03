@@ -1,58 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to GrowWise!</title>
-    <link rel="stylesheet" href="../css/login.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to GrowWise!</title>
+  <link rel="stylesheet" href="../css/login.css" />
 </head>
-
 <body>
-    <div class="container">
-        <h1>Welcome!</h1>
+  <div class="container">
+    <h1>Welcome Back!</h1>
 
-        <label>Enter parent email address:</label>
+        <label>Enter email address:</label>
         <input id="email" type="email" placeholder="Enter your email">
 
-        <label>Enter Nickname:</label>
-        <input id="name" type="text" placeholder="Enter your nickname">
+    <label>Enter Nickname:</label>
+    <input id="name" type="text" placeholder="Enter your nickname">
 
-        <button onclick="validateInput()">Login</button>
-        <label id="warning"></label>
-    </div>
+    <button onclick="validateInput()">Login</button>
+    <label id="warning"></label>
+    
+    <!-- Link to the Signup page -->
+    <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+  </div>
 
-    <script type="module">
-        window.validateInput = function() {
-            const emailInput = document.getElementById("email");
-            const nameInput = document.getElementById("name");
-            const warningLabel = document.getElementById("warning");
+  <script type="module">
+    window.validateInput = function() {
+      const emailInput = document.getElementById("email");
+      const nameInput = document.getElementById("name");
+      const warningLabel = document.getElementById("warning");
 
-            const usernameRegex = /^[a-zA-Z0-9]{1,16}$/; 
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+      const usernameRegex = /^[a-zA-Z0-9]{1,16}$/; 
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
 
-            if (emailInput.value === "" || nameInput.value === "") {
-                warningLabel.innerText = "Please enter a username and email to begin.";
-                return;
-            }
+      if (emailInput.value === "" || nameInput.value === "") {
+        warningLabel.innerText = "Please enter a username and email to begin.";
+        return;
+      }
 
-            if (!usernameRegex.test(nameInput.value)) {
-                warningLabel.innerText = "Username must be 1-16 characters long and contain only letters and numbers.";
-                return;
-            }
+      if (!usernameRegex.test(nameInput.value)) {
+        warningLabel.innerText = "Username must be 1-16 characters long and contain only letters and numbers.";
+        return;
+      }
 
-            if (!emailRegex.test(emailInput.value)) {
-                warningLabel.innerText = "Please enter a valid email address.";
-                return;
-            }
-            
-            sessionStorage.setItem('user', JSON.stringify({
-                email: emailInput.value,
-                nickname: nameInput.value,
-                coins: 0 
-            }));
+      if (!emailRegex.test(emailInput.value)) {
+        warningLabel.innerText = "Please enter a valid email address.";
+        return;
+      }
 
-            window.location.href = 'home.html';
-        }
-    </script>
+      // Check if the account exists (using localStorage for demonstration)
+      let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+      const user = registeredUsers.find(u => u.email === emailInput.value);
+      if (!user) {
+        warningLabel.innerText = "No account found with that email. Please sign up first.";
+        return;
+      }
+      
+      // Optionally, check if the nickname matches the one stored.
+      if (user.nickname !== nameInput.value) {
+        warningLabel.innerText = "Nickname does not match our records.";
+        return;
+      }
+      
+      // Save user in session storage and redirect to home page.
+      sessionStorage.setItem('user', JSON.stringify({
+        email: emailInput.value,
+        nickname: nameInput.value,
+        coins: 0 
+      }));
+
+      window.location.href = 'home.html';
+    }
+  </script>
 </body>
 </html>

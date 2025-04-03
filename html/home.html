@@ -21,15 +21,19 @@
             <div id="settings-dropdown" class="settings-dropdown hidden">
                 <!-- Settings Header -->
                 <div class="settings-header">
-                    <strong>Settings</strong>
+                  <strong>Settings</strong>
                 </div>
-            
+              
                 <!-- Audio toggle icon -->
                 <label id="audio-toggle-label">
-                    <img src="../images/audio_off.png" alt="audio off" id="audio-icon">
-                    <span id="audio-status">Audio Off</span>
+                  <img src="../images/audio_off.png" alt="audio off" id="audio-icon">
+                  <span id="audio-status">Audio Off</span>
                 </label>
-            </div>
+                
+                <!-- Logout Option -->
+                <button id="logout-btn" onclick="logoutUser()">Logout</button>
+              </div>
+              
             <a href="profile.html"><img src="../images/profile.png" alt="profile"></a>
         </nav>
         <h1 class="pageNameLabel">Grow Wise</h1>
@@ -59,6 +63,7 @@
     <!-- Link JavaScript file -->
     <script src="../js/main.js"></script>
     <script src="../js/coinDisplay.js"></script>
+    
 
 </body>
 </html>

@@ -8,18 +8,39 @@
   <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
-  <!-- Header -->
-  <header class="mainHeader">
-    <nav class="HeaderNav">
-      <a href="home.html"><img src="/images/home.png" alt="home"></a>
-      <a href="settings.html"><img src="/images/settings.png" alt="settings"></a>
-      <a href="profile.html"><img src="/images/profile.png" alt="profile"></a>
-    </nav>
-    <h1 class="pageNameLabel">Profile</h1>
-    <!-- Remove the hardcoded coin value -->
-    <label class="coinsLabel" id="coins">Coins: </label>
-    <script src="../js/coinDisplay.js"></script>
-  </header>
+    <header class="mainHeader">
+        <nav class="HeaderNav">
+          <a href="home.html"><img src="/images/home.png" alt="home"></a>
+          
+          <!-- Settings Button -->
+          <a href="#" id="settings-btn">
+            <img src="../images/settings.png" alt="settings">
+          </a>
+      
+          <!-- Settings Dropdown -->
+          <div id="settings-dropdown" class="settings-dropdown hidden">
+            <!-- Settings Header -->
+            <div class="settings-header">
+              <strong>Settings</strong>
+            </div>
+      
+            <!-- Audio toggle -->
+            <label id="audio-toggle-label">
+              <img src="../images/audio_off.png" alt="audio off" id="audio-icon">
+              <span id="audio-status">Audio Off</span>
+            </label>
+      
+            <!-- Logout Option -->
+            <button id="logout-btn" onclick="logoutUser()">Logout</button>
+          </div>
+      
+          <a href="profile.html"><img src="/images/profile.png" alt="profile"></a>
+        </nav>
+        
+        <h1 class="pageNameLabel">Profile</h1>
+        <label class="coinsLabel" id="coins">Coins: </label>
+      </header>
+      
 
   <!-- Profile Container -->
   <section class="profile-container">
@@ -162,5 +183,7 @@
       document.getElementById('updateModal').style.display = 'none';
     });
   </script>
+   <script src="../js/coinDisplay.js"></script>
+   <script src="../js/main.js"></script>
 </body>
 </html>
