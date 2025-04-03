@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - GrowWise</title>
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Create an Account</h1>
+
+    <label>Enter email address:</label>
+    <input id="email" type="email" placeholder="Enter your email">
+
+    <label>Confirm email address:</label>
+    <input id="confirmEmail" type="email" placeholder="Confirm your email">
+
+    <label>Set Nickname:</label>
+    <input id="name" type="text" placeholder="Choose a nickname">
+
+    <button onclick="signup()">Sign Up</button>
+    <label id="warning"></label>
+
+    <!-- Link back to the Login page -->
+    <p>Already have an account? <a href="index.html">Login here</a></p>
+  </div>
+
+  <script type="module">
+    window.signup = function() {
+      const emailInput = document.getElementById("email");
+      const confirmEmailInput = document.getElementById("confirmEmail");
+      const nameInput = document.getElementById("name");
+      const warningLabel = document.getElementById("warning");
+
+      const usernameRegex = /^[a-zA-Z0-9]{1,16}$/; 
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+
+      // Check for empty inputs
+      if (emailInput.value === "" || confirmEmailInput.value === "" || nameInput.value === "") {
+        warningLabel.innerText = "Please fill in all fields.";
+        return;
+      }
+
+      // Validate email formats
+      if (!emailRegex.test(emailInput.value) || !emailRegex.test(confirmEmailInput.value)) {
+        warningLabel.innerText = "Please enter a valid email address.";
+        return;
+      }
+
+      // Confirm emails match
+      if (emailInput.value !== confirmEmailInput.value) {
+        warningLabel.innerText = "Email addresses do not match.";
+        return;
+      }
+
+      // Validate nickname
+      if (!usernameRegex.test(nameInput.value)) {
+        warningLabel.innerText = "Nickname must be 1-16 characters long and contain only letters and numbers.";
+        return;
+      }
+
+      // Check if the email is already registered (using localStorage for dnow)
+      let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+      const existingUser = registeredUsers.find(u => u.email === emailInput.value);
+      if (existingUser) {
+        warningLabel.innerText = "An account with this email already exists. Please login.";
+        return;
+      }
+
+      // Register the new user
+      registeredUsers.push({
+        email: emailInput.value,
+        nickname: nameInput.value,
+        coins: 0
+      });
+      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+
+      
+      sessionStorage.setItem('user', JSON.stringify({
+        email: emailInput.value,
+        nickname: nameInput.value,
+        coins: 0
+      }));
+
+      window.location.href = 'home.html';
+    }
+  </script>
+</body>
+</html>
