@@ -12,19 +12,24 @@
 
 // questions for each quiz
 const quizzes = {
-    uscapitals: [
-        { question: "What is the capital of California?", answers: ["Sacramento", "Los Angeles", "San Diego", "San Francisco"], correct: 0 },
-        { question: "What is the capital of New York?", answers: ["Albany", "New York City", "Buffalo", "Rochester"], correct: 0 },
-        { question: "What is the capital of Florida?", answers: ["Tallahassee", "Miami", "Orlando", "Jacksonville"], correct: 0 },
-        { question: "What is the capital of Illinois?", answers: ["Springfield", "Chicago", "Peoria", "Naperville"], correct: 0 },
+    math: [
+        { question: "What is 2 + 2?", answers: ["3", "4", "5", "6"], correct: 1 },
+        { question: "What is 5 * 3?", answers: ["15", "10", "20", "25"], correct: 0 },
+        { question: "What is 9 - 4?", answers: ["5", "6", "7", "8"], correct: 0 },
     ],
-    trafficlaws: [
-        { question: "What does a red traffic light mean?", answers: ["Stop", "Go", "Yield", "Slow Down"], correct: 0 },
-        { question: "What shape is a stop sign?", answers: ["Octagon", "Circle", "Triangle", "Square"], correct: 0 },
+    shapes: [
+        { question: "What shape has three sides?", answers: ["Triangle", "Square", "Circle", "Rectangle"], correct: 0 },
+        { question: "What shape has four equal sides?", answers: ["Square", "Triangle", "Circle", "Rectangle"], correct: 0 },
+        { question: "What shape is round?", answers: ["Circle", "Square", "Triangle", "Rectangle"], correct: 0 },
     ],
-    
+    letters: [
+        { question: "What letter comes after A?", answers: ["B", "C", "D", "E"], correct: 0 },
+        { question: "What letter comes before C?", answers: ["A", "B", "D", "E"], correct: 1 },
+        { question: "What letter is the first in the alphabet?", answers: ["A", "B", "C", "D"], correct: 0 },
+    ],
     fruits: [
         { question: "Which fruit is known as the king of fruits?", answers: ["Mango", "Apple", "Banana", "Pineapple"], correct: 0 },
+        { question: "Which fruit is red and often associated with love?", answers: ["Strawberry", "Apple", "Cherry", "Pomegranate"], correct: 0 },
         { question: "Which fruit is red and often associated with love?", answers: ["Strawberry", "Apple", "Cherry", "Pomegranate"], correct: 0 },
     ],
 };
