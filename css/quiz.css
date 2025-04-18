@@ -9,13 +9,27 @@
     box-sizing: border-box;
 }
 
+/* Create a container for the question and answers */
+/* Style for the quiz card */
+.quiz-box {
+    background-color: white;  /* White background for better readability */
+    border-radius: 10px;      /* Rounded corners for a soft look */
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 100%;
+    max-width: 600px;  /* Ensure the card doesn't get too wide on larger screens */
+    text-align: center;
+}
 
+/* Styling for the question */
 #question {
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: 20px;
+    color: #333; 
 }
 
+/* Style for answer buttons */
 #answers {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 buttons per row */
@@ -24,14 +38,13 @@
     align-items: center;
     margin-bottom: 30px;
 }
-
 /* Style for answer buttons */
 #answers .btn {
     padding: 15px 20px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-align: center;
     border: 2px solid #007bff;
-    border-radius: 5px;
+    border-radius: 8px;  /* Slightly rounder corners */
     background-color: #f0f8ff;
     color: #007bff;
     cursor: pointer;
@@ -49,18 +62,20 @@
     cursor: not-allowed;
 }
 
+/* Style for the next button */
 #next-btn,
 #answers + .btn {
     margin-top: 20px;
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     border: 2px solid #28a745;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #e8f5e9;
     color: #28a745;
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
 
 #next-btn:hover,
 #answers + .btn:hover {
