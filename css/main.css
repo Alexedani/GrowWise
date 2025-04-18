@@ -55,13 +55,12 @@ body  * {
     overflow: hidden; /* Prevent content overflow */
 }
 
-/* Image Styles */
 .card img {
-    width: auto;  /* Maintain the image's original width */
-    height: auto; /* Maintain the image's original height */
-    max-width: 100%;  /* Ensure the image doesn't overflow the card */
-    max-height: 180px; /* Increase max height to use more space for the image */
-    margin-bottom: 20px; /* Space between image and text */
+  width: 100%;                /* fill the width of the card */
+  height: 180px;              /* fix the height of all images */
+  object-fit: cover;          /* ensures image fills the space nicely */
+  margin-bottom: 20px;
+  border-radius: 10px;        /* optional: gives images a nice rounded corner */
 }
 
 .card h2 {
