@@ -1,189 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>User Profile - GrowWise</title>
-  <link rel="stylesheet" href="../css/header.css">
-  <link rel="stylesheet" href="../css/profile.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrowWise – Profile</title>
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+
+  <!-- Page‑specific -->
+  <link rel="stylesheet" href="../css/profile.css" />
+
+  <!-- Kid‑friendly rounded font -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header class="mainHeader">
-        <nav class="HeaderNav">
-          <a href="home.html"><img src="/images/home.png" alt="home"></a>
-          
-          <!-- Settings Button -->
-          <a href="#" id="settings-btn">
-            <img src="../images/settings.png" alt="settings">
-          </a>
-      
-          <!-- Settings Dropdown -->
-          <div id="settings-dropdown" class="settings-dropdown hidden">
-            <!-- Settings Header -->
-            <div class="settings-header">
-              <strong>Settings</strong>
-            </div>
-      
-            <!-- Audio toggle -->
-            <label id="audio-toggle-label">
-              <img src="../images/audio_off.png" alt="audio off" id="audio-icon">
-              <span id="audio-status">Audio Off</span>
-            </label>
-      
-            <!-- Logout Option -->
-            <button id="logout-btn" onclick="logoutUser()">Logout</button>
-          </div>
-      
-          <a href="profile.html"><img src="/images/profile.png" alt="profile"></a>
-        </nav>
-        
-        <h1 class="pageNameLabel">Profile</h1>
-        <label class="coinsLabel" id="coins">Coins: </label>
-      </header>
-      
 
-  <!-- Profile Container -->
-  <section class="profile-container">
-    <!-- Current Profile Information Display -->
-    <div class="profile-display">
-      <h2>Current Profile</h2>
-      <div class="display-info">
-        <div class="avatar-preview">
-          <img id="displayAvatar" src="../images/current-avatar.png" alt="Current Avatar">
-        </div>
-        <div class="info-details">
-          <p><strong>Nickname:</strong> <span id="currentNickname">CurrentNickname</span></p>
-          <p id="currentBiography">This is your current biography. Update it in the form on the right.</p>
-        </div>
-      </div>
-      <!-- Statistics -->
-      <div class="stats">
-        <h3>Your Statistics</h3>
-        <ul>
-          <li><strong>Coins Earned:</strong> <span id="stats-coins"></span></li>
-          <li><strong>Lessons Completed:</strong> 25</li>
-          <li><strong>Quizzes Completed:</strong> 10</li>
-        </ul>
+<body class="background-image">
+<!-- ▸ Header -->
+<header class="mainHeader">
+  <nav class="HeaderNav">
+    <a href="home.html"><img src="../images/home.png" alt="home" /></a>
+
+    <a href="#" id="settings-btn"><img src="../images/settings.png" alt="settings" /></a>
+    <div id="settings-dropdown" class="settings-dropdown hidden">
+      <div class="settings-header"><strong>Settings</strong></div>
+      <label id="audio-toggle-label">
+        <img src="../images/audio_off.png" alt="audio off" id="audio-icon" />
+        <span id="audio-status">Audio Off</span>
+      </label>
+      
+      <button id="logout-btn" onclick="logoutUser()">Logout</button>
+    </div>
+
+    <a href="profile.html"><img src="../images/profile.png" alt="profile" /></a>
+  </nav>
+
+  <h1 class="pageNameLabel">Grow Wise</h1>
+  <span class="coinsLabel"><img src="../images/coin.jpg" alt="coin" class="coin-icon" /> <span id="coins">0 </span></span>
+
+</header>
+
+<!-- ▸ Profile Card -->
+<main class="card-container">
+  <div class="card profile-card" id="profileCard">
+
+    <!-- top row: avatar on the left, text details on the right -->
+    <div class="profile-main">
+      <img src="../images/avatar.png"
+           alt="User Avatar"
+           class="avatar"
+           id="avatarDisplay"/>
+
+      <div class="details">
+        <p id="nicknameText">Nickname: janesmith99</p>
+        <p id="bioText">Email: janesmith@example.com</p>
+        <p id="currentBiography">
+          This is your current biography. Update it in the form to change it.
+        </p>
       </div>
     </div>
 
-    <!-- Update Profile Form -->
-    <div class="profile-edit">
-      <h2>Update Profile</h2>
-      <form id="updateProfileForm">
-        <div class="form-group">
-          <label for="nickname">Nickname:</label>
-          <input type="text" id="nickname" name="nickname" placeholder="Enter new nickname">
-        </div>
-        <div class="form-group avatar-section">
-          <label>Avatar:</label>
-          <div class="avatar-actions">
-            <div class="avatar-preview">
-              <img id="editAvatarPreview" src="../images/current-avatar.png" alt="Current Avatar">
-            </div>
-            <input type="file" id="avatar" name="avatar" accept="image/*">
-            <a href="shop.html" class="customize-button">Customize Avatar</a>
-          </div>
-        </div>
-        <div class="form-group">
-          <textarea id="biography" name="biography" placeholder="Tell something interesting about you"></textarea>
-        </div>
-        <div class="form-group">
-          <button type="submit">Save Changes</button>
-        </div>
-      </form>
+    <!-- achievements row (stays exactly the same) -->
+    <div class="achievements">
+      <h3>Achievements</h3>
+      <div><strong>⭐ Coins:</strong> <span id="coinsStat">0</span></div>
+      <div><strong>📘 Lessons:</strong> <span id="lessonsStat">0</span></div>
+      <div><strong>🧠 Quizzes:</strong> <span id="quizzesStat">0</span></div>
     </div>
-  </section>
 
-  <!-- Modal Popup for Update Confirmation -->
-  <div id="updateModal" class="modal">
-    <div class="modal-content">
-      <p>Your changes have been updated!</p>
-      <button id="closeModal">Close</button>
-    </div>
+    <!-- your original Edit Profile button -->
+    <button onclick="openEditCard()">Edit Profile</button>
   </div>
+</main>
 
-  <script>
-    // Load user data from sessionStorage when the DOM is fully loaded
-    document.addEventListener("DOMContentLoaded", function() {
-      let user = JSON.parse(sessionStorage.getItem("user"));
-      if (user) {
-        // Update profile display if stored values exist
-        if (user.nickname) {
-          document.getElementById("currentNickname").textContent = user.nickname;
-          document.getElementById("nickname").value = user.nickname;
-        }
-        if (user.biography) {
-          document.getElementById("currentBiography").textContent = user.biography;
-          document.getElementById("biography").value = user.biography;
-        }
-        if (user.avatar) {
-          document.getElementById("displayAvatar").src = user.avatar;
-          document.getElementById("editAvatarPreview").src = user.avatar;
-        }
-      } else {
-        // Set default user object if not already in sessionStorage
-        user = {
-          coins: 0,
-          nickname: "CurrentNickname",
-          biography: "This is your current biography. Update it in the form on the right.",
-          avatar: "../images/current-avatar.png"
-        };
-        sessionStorage.setItem("user", JSON.stringify(user));
-      }
-    });
+<!-- ▸ Edit Profile Modal -->
+<div class="modal-overlay hidden" id="edit-modal">
+  <div class="edit-card">
+    <span class="close-button" onclick="closeEditCard()">×</span>
+    <h2>Edit Profile</h2>
 
-    // Update profile form submission
-    const updateForm = document.getElementById('updateProfileForm');
-    updateForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Retrieve the current user data from sessionStorage or initialize if not present
-      let user = JSON.parse(sessionStorage.getItem("user")) || {};
+    <form id="edit-form">
+      <label for="nickname">Nickname</label>
+      <input type="text" id="nickname" name="nickname" placeholder="Enter your nickname">
 
-      // Get new values from form inputs
-      const newNickname = document.getElementById('nickname').value.trim();
-      const newBiography = document.getElementById('biography').value.trim();
-      const avatarInput = document.getElementById('avatar');
-      
-      // Update user object and display values if input is not empty
-      if (newNickname !== '') {
-        user.nickname = newNickname;
-        document.getElementById("currentNickname").textContent = newNickname;
-      }
-      
-      if (newBiography !== '') {
-        user.biography = newBiography;
-        document.getElementById("currentBiography").textContent = newBiography;
-      }
-      
-      // Update avatar if a new file is selected
-      if (avatarInput.files && avatarInput.files[0]) {
-        const file = avatarInput.files[0];
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          user.avatar = e.target.result;
-          document.getElementById("displayAvatar").src = e.target.result;
-          document.getElementById("editAvatarPreview").src = e.target.result;
-          // Save the updated user object in sessionStorage after the avatar loads
-          sessionStorage.setItem("user", JSON.stringify(user));
-        }
-        reader.readAsDataURL(file);
-      } else {
-        // If no new avatar, immediately save the updated user data
-        sessionStorage.setItem("user", JSON.stringify(user));
-      }
-      
-      avatarInput.value = '';
-      
-      document.getElementById("updateModal").style.display = "block";
-    });
-    
-    document.getElementById('closeModal').addEventListener('click', function() {
-      document.getElementById('updateModal').style.display = 'none';
-    });
-  </script>
-   <script src="../js/coinDisplay.js"></script>
-   <script src="../js/main.js"></script>
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description" placeholder="Enter description">
+
+      <label for="avatar">Avatar</label>
+      <input type="file" id="avatar" name="avatar" accept="image/*">
+      <img id="avatar-preview" class="avatar-preview" alt="Avatar Preview">
+
+      <a href="shop.html" class="customize-button" style="display:block;margin-bottom:12px;">Customize Avatar</a>
+
+      <div class="button-group">
+        <button type="button" onclick="closeEditCard()">Cancel</button>
+        <button type="button" onclick="saveChanges()">Save Changes</button>
+        
+      </div>
+    </form>
+  </div>
+</div>
+<!-- ▸ Create Profile Modal (shows only once) -->
+<div class="modal-overlay hidden" id="create-modal">
+  <div class="edit-card">
+    <h2>Create Profile</h2>
+
+    <form id="create-form">
+      <label for="newDescription">
+        Description <span class="required-asterisk">*</span>
+      <input type="text" id="newDescription" placeholder="Tell us about yourself">
+      <span id="descErr" class="error-msg">Please tell us about yourself</span>
+
+      <label for="newAvatar">
+        Avatar <span class="required-asterisk">*</span>
+      </label>
+      <input type="file" id="newAvatar" accept="image/*">
+      <img id="newAvatarPreview" class="avatar-preview" alt="Avatar preview">
+      <span id="avatarErr" class="error-msg">Please choose an image.</span>
+
+      <div class="button-group">
+        <button type="button" onclick="saveNewProfile()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script src="../js/profile.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/coinDisplay.js"></script>
 </body>
 </html>
