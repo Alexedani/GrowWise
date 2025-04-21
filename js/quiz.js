@@ -104,6 +104,12 @@ confirmButton.addEventListener("click", () => {
     if (selectedAnswerIndex === currentQuestion.correct) {
         alert("Correct!");
         score++; 
+        let user = JSON.parse(sessionStorage.getItem('user'));
+        if (user && typeof user.coins === "number") {
+            user.coins += 10;
+            sessionStorage.setItem('user', JSON.stringify(user));
+            updateCoinsDisplay();  // optional but ensures live UI update
+        }
     } else {
         alert("Wrong!");
     }
