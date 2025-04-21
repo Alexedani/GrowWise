@@ -1,27 +1,23 @@
-/* helpers ------------------------------------------------*/
 const $  = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
-/* -------- confirmation dialog helper (replaces toast) -------- */
-function confirmBox(message){
+/* quick modal‑style confirm box */
+function confirmBox(msg) {
   const ov = document.createElement("div");
   ov.className = "dialog‑overlay";
-  ov.innerHTML = `
-      <div class="dialog">
-        ${message}
-        <br><button id="dlgOK">OK</button>
-      </div>`;
+  ov.innerHTML = `<div class="dialog">${msg}<br><button id="dlgOK">OK</button></div>`;
   document.body.appendChild(ov);
-  $("#dlgOK").onclick = ()=>ov.remove();
+  $("#dlgOK").onclick = () => ov.remove();
 }
 
-/* -- live avatar preview in both modals ------------------------ */
-["#avatar", "#newAvatar"].forEach(sel=>{
-  $(sel).addEventListener("change", e=>{
-    if(e.target.files[0]){
+["#avatar", "#newAvatar"].forEach(sel => {
+  const input = $(sel);
+  if (!input) return;
+  input.addEventListener("change", e => {
+    if (e.target.files[0]) {
       const r = new FileReader();
-      r.onload = ev=>{
-        const img = sel==="#avatar" ? $("#avatar-preview") : $("#newAvatarPreview");
+      r.onload = ev => {
+        const img = sel === "#avatar" ? $("#avatar-preview") : $("#newAvatarPreview");
         img.src = ev.target.result;
         img.classList.remove("hidden");
       };
@@ -30,111 +26,112 @@ function confirmBox(message){
   });
 });
 
-
-/* --------------- get current user ----------------------*/
-const currentSession = JSON.parse(sessionStorage.getItem("user") || "null");
-if(!currentSession) window.location.href = "index.html";
+const currSession = JSON.parse(sessionStorage.getItem("user") || "null");
+if (!currSession) window.location.href = "index.html";
 
 const users = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
-const idx   = users.findIndex(u=>u.email===currentSession.email);
-if(idx===-1) console.error("No matching account");
+const idx   = users.findIndex(u => u.email === currSession.email);
+if (idx === -1) console.error("No matching account found");
 
-/* --------------- page init -----------------------------*/
-window.addEventListener("load", populateCard);
-
-function populateCard(){
-  const u = users[idx];
-  $("#nicknameText").textContent = `Nickname: ${u.nickname}`;
-  $("#bioText").textContent      = `Email: ${u.email}`;
-  $("#currentBiography").textContent = u.description || "Click Edit Profile to add a bio.";
-  $("#avatarDisplay").src        = u.avatar || "../images/avatar.png";
-
-  if(!u.description && !u.avatar) openCreateCard();
+/* show avatar in *both* places */
+function renderAvatars(url) {
+  const fallback = "../images/avatar.png";
+  $("#avatarDisplay").src = url || fallback;          // profile card
+  const header = $("#headerAvatar");
+  if (header) header.src = url || fallback;           // fixed header
 }
 
-/* =======================================================
-   EDIT PROFILE (unchanged + success toast)
-   =======================================================*/
-function openEditCard(){
+window.addEventListener("load", populateCard);
+
+function populateCard() {
+  const u = users[idx];
+  $("#nicknameText").textContent     = `Nickname: ${u.nickname}`;
+  $("#bioText").textContent          = `Email: ${u.email}`;
+  $("#currentBiography").textContent = u.description || "Click Edit Profile to add a bio.";
+  renderAvatars(u.avatar);
+
+  // for new user ⇒ open “Create profile” modal
+  if (!u.description && !u.avatar) openCreateCard();
+}
+
+// eidt profile modal
+function openEditCard() {
   $("#edit-modal").classList.remove("hidden");
   $("#nickname").value     = users[idx].nickname;
   $("#description").value  = users[idx].description || "";
   $("#avatar-preview").src = users[idx].avatar      || "";
 }
-function closeEditCard(){ $("#edit-modal").classList.add("hidden"); }
+function closeEditCard() { $("#edit-modal").classList.add("hidden"); }
 
-function saveChanges(){
+function saveChanges() {
   const nickname    = $("#nickname").value.trim();
   const description = $("#description").value.trim();
   const avatarFile  = $("#avatar").files[0];
 
-  if(nickname)    users[idx].nickname    = nickname;
-  if(description) users[idx].description = description;
+  if (nickname)    users[idx].nickname    = nickname;
+  if (description) users[idx].description = description;
 
-  const commit = ()=>{
-    syncStores(); populateCard(); closeEditCard();
+  const commit = () => {
+    syncStores();
+    populateCard();   
+    // renderAvatars(users[idx].avatar);
+    closeEditCard();
     confirmBox("✅ Profile successfully updated.");
   };
 
-  if(avatarFile){
+  if (avatarFile) {
     const r = new FileReader();
-    r.onload = e=>{ users[idx].avatar=e.target.result; commit(); };
+    r.onload = e => { users[idx].avatar = e.target.result; commit(); };
     r.readAsDataURL(avatarFile);
-  }else commit();
+  } else {
+    commit();
+  }
 }
 
-/* =======================================================
-   CREATE PROFILE  (validation + success toast)
-   =======================================================*/
-function openCreateCard(){ $("#create-modal").classList.remove("hidden"); }
-function closeCreateCard(){ $("#create-modal").classList.add("hidden"); }
+/*  CREATE PROFILE (first‑time)  */
+function openCreateCard()  { $("#create-modal").classList.remove("hidden"); }
+function closeCreateCard() { $("#create-modal").classList.add("hidden"); }
 
-function saveNewProfile(){
+function saveNewProfile() {
   clearErrors();
 
   const descVal   = $("#newDescription").value.trim();
   const avatarSel = $("#newAvatar").files[0];
-  let   valid     = true;
+  let   ok        = true;
 
-  if(descVal===""){
-    showError("#newDescription","#descErr");
-    valid = false;
-  }
-  if(!avatarSel){
-    showError("#newAvatar","#avatarErr");
-    valid = false;
-  }
-  if(!valid) return;      // stop – let user fix inputs
+  if (descVal === "")  { showError("#newDescription", "#descErr");  ok = false; }
+  if (!avatarSel)      { showError("#newAvatar",     "#avatarErr"); ok = false; }
+  if (!ok) return;
 
-  fileToDataURL(avatarSel, url=>{
+  fileToDataURL(avatarSel, url => {
     users[idx].description = descVal;
     users[idx].avatar      = url;
-    syncStores(); populateCard(); closeCreateCard();
+    syncStores();
+    renderAvatars(url);
+    closeCreateCard();
     confirmBox("🎉 Profile successfully created!");
   });
 }
 
-/* ---------------- helpers ------------------------------*/
-function showError(inputSel, errSel){
+function showError(inputSel, errSel) {
   $(inputSel).classList.add("error");
   $(errSel).style.display = "block";
 }
-function clearErrors(){
-  $$(".error-msg").forEach(e=>e.style.display="none");
-  $$("input.error").forEach(i=>i.classList.remove("error"));
+function clearErrors() {
+  $$(".error-msg").forEach(e => e.style.display = "none");
+  $$("input.error").forEach(i => i.classList.remove("error"));
 }
-function fileToDataURL(file, cb){
+function fileToDataURL(file, cb) {
   const r = new FileReader();
-  r.onload = e=>cb(e.target.result);
+  r.onload = e => cb(e.target.result);
   r.readAsDataURL(file);
 }
-function syncStores(){
+function syncStores() {
   localStorage.setItem("registeredUsers", JSON.stringify(users));
   sessionStorage.setItem("user", JSON.stringify({
-    ...currentSession,
+    email:       users[idx].email,
     nickname:    users[idx].nickname,
     description: users[idx].description,
     avatar:      users[idx].avatar
   }));
-  
 }

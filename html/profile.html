@@ -33,11 +33,16 @@
       <button id="logout-btn" onclick="logoutUser()">Logout</button>
     </div>
 
-    <a href="profile.html"><img src="../images/profile.png" alt="profile" /></a>
+    <!-- <a href="profile.html"><img src="../images/profile.png" alt="profile" /></a> -->
+     <!-- Was:  <img src="../images/profile.png" …> -->
+  <a href="profile.html">
+    <img id="headerAvatar" class="header-avatar"              
+         alt="">
+  </a>
   </nav>
 
   <h1 class="pageNameLabel">Grow Wise</h1>
-  <span class="coinsLabel"><img src="../images/coin.jpg" alt="coin" class="coin-icon" /> <span id="coins">0 </span></span>
+  <span class="coinsLabel"><img src="../images/coin.jpg" alt="coin" class="coin-icon" /> <span id="coins">Coins: </span></span>
 
 </header>
 
@@ -47,16 +52,15 @@
 
     <!-- top row: avatar on the left, text details on the right -->
     <div class="profile-main">
-      <img src="../images/avatar.png"
-           alt="User Avatar"
+      <img
+           alt=""
            class="avatar"
            id="avatarDisplay"/>
 
       <div class="details">
-        <p id="nicknameText">Nickname: janesmith99</p>
-        <p id="bioText">Email: janesmith@example.com</p>
+        <p id="nicknameText"></p>
+        <p id="bioText"></p>
         <p id="currentBiography">
-          This is your current biography. Update it in the form to change it.
         </p>
       </div>
     </div>
