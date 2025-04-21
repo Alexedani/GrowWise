@@ -86,3 +86,130 @@
 .hidden {
     display: none;
 }
+/* Green for correct, red for incorrect */
+.btn.correct {
+    background-color: #28a745 !important;
+    color: white !important;
+  }
+  .btn.incorrect {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+  /* Keep your existing “selected” styling if you like, or remove it */
+  .btn.selected {
+    outline: 2px solid #333;
+  }
+
+  /* ─── container ─── */
+.controls {
+    position: relative;
+    margin-top: 20px;
+    min-height: 48px;          /* ensure enough height for absolute children */
+  }
+  
+  /* ─── shared control‑button styling ─── */
+.controls .btn {
+    position: absolute;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    background-color: #e8f5e9;
+    color: #28a745;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .controls .btn:hover {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  /* hide by default if .hidden is applied */
+  .controls .hidden {
+    display: none;
+  }
+  
+  /* container positioning */
+  .controls {
+    position: relative;
+    min-height: 48px;
+  }
+  
+  /* left slot */
+  #prev-btn {
+    left: 0;
+  }
+  
+  /* center slot: smaller buttons */
+  #confirm-btn,
+  #show-correct-btn {
+    left: 46%;
+    transform: translateX(-40%);
+    /* padding: 8px 16px;      make it smaller */
+    /* font-size: 1rem; */
+    white-space: nowrap;    /* avoid wrapping */
+  }
+  
+  /* right slot */
+  #next-btn {
+    right: 0;
+  }
+  
+  /* correct/incorrect overrides */
+  .btn.correct {
+    background-color: #28a745 !important;
+    color: white !important;
+  }
+  
+  .btn.incorrect {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+  .btn.selected {
+    outline: 2px solid #333;
+  }
+  /* popup overlay background */
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  }
+  
+  /* popup box */
+  .popup-box {
+    background: #fff;
+    padding: 24px 32px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  
+  /* popup text */
+  .popup-box p {
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+  }
+  
+  /* popup OK button (matches your control buttons) */
+  .popup-box button {
+    padding: 8px 20px;
+    font-size: 1rem;
+    border: 2px solid #28a745;
+    border-radius: 6px;
+    background: #e8f5e9;
+    color: #28a745;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .popup-box button:hover {
+    background: #28a745;
+    color: #fff;
+  }
+
+  
+  
