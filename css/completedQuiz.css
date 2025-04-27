@@ -83,7 +83,7 @@ body {
 .results-container #coins-message {
     font-size: 1.6rem; /* Make it slightly larger */
     font-weight: bold; /* Emphasize the text */
-    color: #28a745; /* Green color for positive feedback */
+    color: #17603b; /* Green color for positive feedback */
     margin-top: 20px; /* Add some spacing above */
     margin-bottom: 40px; /* Add spacing below */
     animation: bounce 1s ease-in-out; /* Add a bounce animation for fun */

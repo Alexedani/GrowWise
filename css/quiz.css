@@ -204,10 +204,12 @@
   }
   
   /* popup text */
-  .popup-box p {
-    margin-bottom: 16px;
-    font-size: 1.2rem;
-  }
+.popup-box p {
+  margin-bottom: 16px;
+  font-size: 2rem;        /* ← was 1.2rem */
+  font-weight: 600;       /* medium-bold so it stands out */
+  line-height: 1.35;      /* keeps it nicely spaced */
+}
   
   /* popup OK button (matches your control buttons) */
   .popup-box button {
