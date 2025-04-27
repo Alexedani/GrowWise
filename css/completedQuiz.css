@@ -11,23 +11,37 @@ body {
     align-items: center;
     height: 100vh;
 }
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* black color with 40% opacity */
+    z-index: 1; /* Sit behind the content */
+}
+
 
 /* Results container styling */
 .results-container {
     text-align: center;
-    background-color: #ffffff;
+    background-color: #f7f9f0;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     padding: 30px;
     width: 80%;
+    position: relative;
+    z-index: 2;
     max-width: 500px;
     animation: fadeIn 1s ease-in-out;
+    margin-bottom: 40px; /* more space below each p */
+    line-height: 1.6; 
 }
 
 
 .results-container h1 {
     font-size: 2.5rem;
-    color: #1be847;
+    color: #17603b;
     margin-bottom: 20px;
 }
 
@@ -42,16 +56,15 @@ body {
     padding: 10px 20px;
     font-size: 1rem;
     color: #fff;
-    background-color: #1be847;
+    background-color: #17603b;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
     text-decoration: none;
 }
 
 .results-container .btn:hover {
-    background-color: #1be847;
+    background-color: #036514;
 }
 
 /* Animation for fade-in effect */
@@ -68,11 +81,11 @@ body {
 
 /* Styling for the coins message */
 .results-container #coins-message {
-    font-size: 1.5rem; /* Make it slightly larger */
+    font-size: 1.6rem; /* Make it slightly larger */
     font-weight: bold; /* Emphasize the text */
     color: #28a745; /* Green color for positive feedback */
-    margin-top: 10px; /* Add some spacing above */
-    margin-bottom: 20px; /* Add spacing below */
+    margin-top: 20px; /* Add some spacing above */
+    margin-bottom: 40px; /* Add spacing below */
     animation: bounce 1s ease-in-out; /* Add a bounce animation for fun */
 }
 

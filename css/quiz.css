@@ -83,6 +83,20 @@
     color: white;
 }
 
+/* Apply hover styles only to enabled buttons */
+.btn:hover:enabled {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Style for disabled buttons */
+.btn:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  pointer-events: none; /* Prevent any mouse interactions */
+}
+
 .hidden {
     display: none;
 }
