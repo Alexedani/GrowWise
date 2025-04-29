@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruits and Veggies Lesson</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .lesson-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .intro-section {
+            background-color: #FFFAE5;
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-section h2 {
+            font-size: 2em;
+            color: #FF8C00;
+            margin-bottom: 10px;
+        }
+
+        .intro-section p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .nutrition-section p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .fruit-veggie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            justify-items: center;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .fruit-veggie-card {
+            background-color: #FFDDC1;
+            border: 2px solid #FF8C00;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .fruit-veggie-card:hover {
+            transform: scale(1.1);
+            background-color: #FFD700;
+        }
+
+        .nav-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #FF8C00;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #FF4500;
+        }
+
+        .nutrition-section {
+            background-color: #FFFAE5;
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .nutrition-section h2 {
+            font-size: 2em;
+            color: #FF8C00;
+            margin-bottom: 10px;
+        }
+
+        .nutrition-section ul {
+            list-style-type: disc;
+            margin: 10px auto;
+            padding: 0;
+            text-align: left;
+            max-width: 600px;
+        }
+
+        .nutrition-section li {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .videos {
+            background-color: #FFFAE5;
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .videos h2 {
+            font-size: 2em;
+            color: #FF8C00;
+            margin-bottom: 20px;
+        }
+
+        .videos iframe {
+            border: 2px solid #FF8C00;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 560px;
+            height: 315px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .videos iframe:hover {
+            transform: scale(1.05);
+        }
+
+        .sorting-game {
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .sorting-game .items img {
+            width: 100px;
+            height: auto;
+            margin: 10px;
+            cursor: grab;
+        }
+
+        .sorting-game .dropzones {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .sorting-game .dropzones div {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #FF8C00;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 150px;
+            font-size: 1.2em;
+            color: #555;
+            background-color: #FFFAE5;
+            transition: background-color 0.3s;
+        }
+
+        .sorting-game .dropzones div:hover {
+            background-color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="mainHeader">
+        <nav class="HeaderNav">
+            <a href="home.html"><img src="../images/home.png" alt="Home" /></a>
+            <a href="#" id="settings-btn">
+                <img src="../images/settings.png" alt="Settings" />
+            </a>
+            <div id="settings-dropdown" class="settings-dropdown hidden">
+                <div class="settings-header"><strong>Settings</strong></div>
+                <label id="audio-toggle-label">
+                    <img src="../images/audio_off.png" alt="Audio Off" id="audio-icon" />
+                    <span id="audio-status">Audio Off</span>
+                </label>
+            </div>
+            <a href="profile.html"><img src="../images/profile.png" alt="Profile" /></a>
+            <a href="learn.html" class="back-link">
+                <img src="../images/back.jpg" alt="Back to Learn" />
+                <span>Back</span>
+            </a>
+        </nav>
+        <h1 class="pageNameLabel">Learn About Fruits and Veggies</h1>
+        <label class="coinsLabel" id="coins">Coins: </label>
+        <script src="../js/coinDisplay.js"></script>
+    </header>
+
+    <!-- Introduction Section -->
+    <div class="intro-section">
+        <h2>Welcome to the World of Fruits and Veggies!</h2>
+        <p>Fruits and vegetables are not only delicious but also super healthy! Let's explore some of the most popular ones and learn about their benefits.</p>
+    </div>
+
+    <!-- Interactive Fruit and Veggie Grid -->
+    <div class="lesson-container">
+        <div class="fruit-veggie-grid" id="fruit-veggie-grid">
+            <!-- Fruit and Veggie cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <div class="nutrition-section">
+        <h2>Why Are Fruits and Veggies Important?</h2>
+        <p>Fruits and vegetables are packed with vitamins, minerals, and fiber that help keep us healthy and strong!</p>
+        <ul>
+            <li>Apples are great for your heart.</li>
+            <li>Carrots help improve your eyesight.</li>
+            <li>Bananas give you energy for the day.</li>
+            <li>Broccoli boosts your immune system.</li>
+        </ul>
+
+        
+    </div>
+
+    <div class="videos">
+        <h2>Watch and Learn!</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/OcbWkrsnb14" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="nutrition-section">
+        <h2>Nurtients</h2>
+        <p>Fruits and vegetables are essential for a healthy diet. They provide the nutrients your body needs to grow, stay strong, and fight off illnesses.</p>
+        <ul>
+            <li><strong>Vitamins:</strong> Fruits like oranges and strawberries are rich in Vitamin C, which boosts your immune system.</li>
+            <li><strong>Minerals:</strong> Vegetables like spinach and broccoli are packed with iron and calcium for strong bones and muscles.</li>
+            <li><strong>Fiber:</strong> Apples, carrots, and other produce help with digestion and keep your tummy happy.</li>
+            <li><strong>Energy:</strong> Bananas and potatoes provide energy to keep you active all day.</li>
+            <li><strong>Hydration:</strong> Fruits like watermelon and cucumber keep you hydrated.</li>
+        </ul>
+    </div>
+
+    <div class="sorting-game">
+        <h2>Sort the Fruits and Vegetables!</h2>
+        <div class="items">
+            <img src="../images/apple.png" alt="Apple" draggable="true" ondragstart="drag(event)" id="apple">
+            <img src="../images/carrot.png" alt="Carrot" draggable="true" ondragstart="drag(event)" id="carrot">
+            <img src="../images/banana.jpg" alt="Banana" draggable="true" ondragstart="drag(event)" id="banana">
+            <img src="../images/broccoli.jpg" alt="Broccoli" draggable="true" ondragstart="drag(event)" id="broccoli">
+        </div>
+        <div class="dropzones">
+            <div ondrop="drop(event)" ondragover="allowDrop(event)" id="fruits-zone">Fruits</div>
+            <div ondrop="drop(event)" ondragover="allowDrop(event)" id="veggies-zone">Vegetables</div>
+        </div>
+    </div>
+
+    <div id="feedback" style="text-align: center; font-size: 1.2em; margin-top: 20px;"></div>
+
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="learn.html">Back to Learn</a>
+        <a href="fruitveggiePracticeQuiz.html">Start Practice Quiz</a>
+    </div>
+
+    <script src="../js/fruitveggieLesson.js"></script>
+
+</body>
+</html>
