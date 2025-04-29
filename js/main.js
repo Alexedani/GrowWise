@@ -1,62 +1,52 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("JavaScript loaded!"); // Debugging
+/*  main.js – runs on *every* page that shows the fixed header bar  */
+document.addEventListener("DOMContentLoaded", () => {
 
-    const settingsBtn = document.getElementById("settings-btn");
+    const sessionUser = JSON.parse(sessionStorage.getItem("user") || "null");
+    if (sessionUser && sessionUser.avatar) {
+      const headerImg = document.getElementById("headerAvatar");
+      if (headerImg) headerImg.src = sessionUser.avatar;
+    }
+  
+    /* settings dropdown + audio toggle  */
+    const settingsBtn      = document.getElementById("settings-btn");
     const settingsDropdown = document.getElementById("settings-dropdown");
-    const audioIcon = document.getElementById("audio-icon");
-    const audioStatus = document.getElementById("audio-status");
-    const logoutBtn = document.getElementById("logout-btn"); // Get logout button
-
-    if (!settingsBtn || !settingsDropdown || !audioIcon || !audioStatus) {
-        console.error("Settings button or dropdown or audio elements not found!");
-        return;
-    }
-
-    console.log("Settings button and dropdown found!"); // Debugging
-
-    // Toggle settings dropdown
-    settingsBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("Settings button clicked!"); // Debugging
+    const audioIcon        = document.getElementById("audio-icon");
+    const audioStatus      = document.getElementById("audio-status");
+    const logoutBtn        = document.getElementById("logout-btn");
+  
+    /* dropdown open/close */
+    if (settingsBtn && settingsDropdown) {
+      settingsBtn.addEventListener("click", e => {
+        e.preventDefault();
         settingsDropdown.classList.toggle("show");
-    });
-
-    // Toggle audio on/off when either icon or text is clicked
-    let isAudioOn = false; // Initially, audio is off
-
-    function toggleAudio() {
-        isAudioOn = !isAudioOn; // Toggle audio state
-        if (isAudioOn) {
-            audioIcon.src = "../images/audio_on.png"; // Change to audio-on image
-            audioStatus.textContent = "Audio On"; // Update status text
-        } else {
-            audioIcon.src = "../images/audio_off.png"; // Change to audio-off image
-            audioStatus.textContent = "Audio Off"; // Update status text
+      });
+      document.addEventListener("click", e => {
+        if (!settingsBtn.contains(e.target) &&
+            !settingsDropdown.contains(e.target)) {
+          settingsDropdown.classList.remove("show");
         }
+      });
     }
-
-    // Add event listeners for both icon and text
-    audioIcon.addEventListener("click", toggleAudio); 
-    audioStatus.addEventListener("click", toggleAudio); 
-
-    // Close the settings dropdown when clicking anywhere outside the dropdown or settings button
-    document.addEventListener("click", function (event) {
-        if (!settingsBtn.contains(event.target) && !settingsDropdown.contains(event.target)) {
-            settingsDropdown.classList.remove("show");
-        }
-    });
-
-    // Logout function
-    function logoutUser() {
-        console.log("Logging out..."); // Debugging
-        sessionStorage.removeItem("user"); // Clear session storage
-        window.location.href = "index.html"; // Redirect to login page
+  
+    /* audio on/off */
+    let audioOn = false;
+    const toggleAudio = () => {
+      audioOn = !audioOn;
+      audioIcon.src         = audioOn ? "../images/audio_on.png"
+                                      : "../images/audio_off.png";
+      audioStatus.textContent = audioOn ? "Audio On" : "Audio Off";
+    };
+    if (audioIcon && audioStatus) {
+      audioIcon.addEventListener("click", toggleAudio);
+      audioStatus.addEventListener("click", toggleAudio);
     }
-
-    // Ensure logout button exists before adding event listener
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", logoutUser);
-    } else {
-        console.error("Logout button not found!");
-    }
-});
+  
+    /* logout */
+    const logoutUser = () => {
+      sessionStorage.removeItem("user");
+      window.location.href = "index.html";
+    };
+    if (logoutBtn) logoutBtn.addEventListener("click", logoutUser);
+  
+  });
+  

@@ -22,10 +22,6 @@
     height: 80px;  
 }
 
-.coinsLabel {
-    font-size: 16px;
-    margin-left: 10px;
-}
 
 .pageNameLabel {
     flex-grow: 1; 
@@ -125,8 +121,8 @@
 }
 
 .back-link:focus {
-    outline: none; /* Remove default focus outline */
-    box-shadow: 0 0 0 2px #c0392b; /* Red outline on focus */
+    outline: none; 
+    box-shadow: 0 0 0 2px #c0392b; 
 }
 #logout-btn {
     padding: 10px;
@@ -142,4 +138,27 @@
   
   #logout-btn:hover {
     background-color: #c82333;
+  }
+  
+  .coinsLabel {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-left: 15px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .coin-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+  }
+
+.header-avatar {
+    width: 30px;          /* keep it the same size as other icons */
+    height: 30px;
+    border-radius: 50%;   /* perfect circle */
+    border: 2px solid #000;
+    object-fit: cover;    /* crops long/‑wide pictures nicely */
   }

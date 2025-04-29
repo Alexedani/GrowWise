@@ -14,10 +14,13 @@
         <nav class="HeaderNav">
             <a href="home.html"><img src="/images/home.png" alt="home"></a>
             <a href="settings.html"><img src="/images/settings.png" alt="settings"></a>
-            <a href="profile.html"><img src="/images/profile.png" alt="profile"></a>
+            <a href="profile.html">
+                <img id="headerAvatar" class="header-avatar"              
+                     alt="">
+              </a>
         </nav>
         <h1 class="pageNameLabel">Quiz</h1>
-        <label class="coinsLabel" id="coins">Coins: </label>
+        <span class="coinsLabel"><img src="../images/coin.jpg" alt="coin" class="coin-icon" /><span id="coins">Coins:</span></span>
         <script src="../js/coinDisplay.js"></script>
     </header>
 
@@ -28,11 +31,19 @@
             <div id="answers">
                 <!-- Answer buttons will be dynamically added here -->
             </div>
+            <div class="controls">
+                <button id="prev-btn" class="btn hidden">Previous</button>
+                <button id="confirm-btn" class="btn hidden">Submit Answer</button>
+                <button id="show-correct-btn" class="btn hidden">Check Answer</button>
+                <button id="next-btn" class="btn hidden">Next Question</button>
+              </div>
         </div>
-        <button id="next-btn" class="btn hidden">Next Question</button>
+        <!-- <button id="next-btn" class="btn hidden">Next Question</button> -->
     </section>
 
     <!-- Link JavaScript file -->
     <script src="../js/quiz.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/coinDisplay.js"></script>
 </body>
 </html>

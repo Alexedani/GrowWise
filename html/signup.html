@@ -70,9 +70,11 @@
 
       // Register the new user
       registeredUsers.push({
-        email: emailInput.value,
-        nickname: nameInput.value,
-        coins: 0
+       email:       emailInput.value,
+        nickname:    nameInput.value,
+        description: "",          // ask later
+        avatar:      "",          // ask later
+        coins:       0
       });
       localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
 

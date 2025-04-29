@@ -62,11 +62,16 @@
       }
       
       // Save user in session storage and redirect to home page.
-      sessionStorage.setItem('user', JSON.stringify({
-        email: emailInput.value,
-        nickname: nameInput.value,
-        coins: 0 
-      }));
+      sessionStorage.setItem(
+      "user",
+        JSON.stringify({
+          email:     user.email,
+          nickname:  user.nickname,
+          coins:     user.coins,
+          avatar:    user.avatar,
+          description: user.description
+        })
+      );
 
       window.location.href = 'home.html';
     }

@@ -31,10 +31,14 @@
                 </label>
                 <button id="logout-btn" onclick="logoutUser()">Logout</button>
             </div>
-            <a href="profile.html"><img src="../images/profile.png" alt="profile"></a>
+            <a href="profile.html">
+                <img id="headerAvatar" class="header-avatar"              
+                     alt="">
+              </a>
         </nav>
         <h1 class="pageNameLabel">Quizzes</h1>
-        <label class="coinsLabel" id="coins">Coins: </label>
+        <span class="coinsLabel"><img src="../images/coin.jpg" alt="coin" class="coin-icon" /><span id="coins">Coins:</span></span>
+        <script src="../js/coinDisplay.js"></script>
         <script src="../js/coinDisplay.js"></script>
     </header>
 
@@ -74,13 +78,14 @@
             <div class="card">
                 <a href="quiz.html?quizId=fruits" class="card grow-card">
                 <img src="../images/veggies.jpg" alt="fruitsimg">
-                <h2>Fruits</h2>
+                <h2>Fruits Quiz</h2>
                 <p>Get ready to play the fruity quiz! Can you guess them all?</p>
                 </a>
             </div>
         </section>
     <!-- Link JavaScript file -->
     <script src="../js/main.js"></script>
+    <script src="../js/coinDisplay.js"></script>
 
 </body>
 </html>

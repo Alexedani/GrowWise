@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Results</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/quiz.css">
-    <link rel="stylesheet" href="../css/completedQuiz.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Results</title>
+
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/completedQuiz.css" />
 </head>
 <body class="background-image1">
-    <div class="results-container">
-        <h1>Quiz Completed!</h1>
-        <p id="score-message"></p>
-        <p id="coins-message"></p>
-        <button onclick="window.location.href='quizzes.html'" class="btn">Back to Quizzes</button>
-    </div>
+  <div class="overlay"></div>
 
-    <script>
+  <div class="results-container">
+    <!-- 🔑 show subject -->
+    <h1 id="subject-heading"></h1>
 
-        // get the score from the URL 
-        const urlParams = new URLSearchParams(window.location.search);
-        const score = urlParams.get("score");
-        const total = urlParams.get("total");
-        const percentage = urlParams.get("percentage");
+    <p id="score-message"></p>
+    <p id="coins-message"></p>
 
-        // Update the user's coins in the session storage
-        const user = JSON.parse(sessionStorage.getItem('user'));
+    <button onclick="window.location.href='quizzes.html'" class="btn">
+      Back to Quizzes
+    </button>
+  </div>
 
-        if (user) {
-            // each question right it worth 10 coins
-            // this can be changed 
-            user.coins += 10 * score; 
-            // setitem puts the updated user object back into the storage
-            // so that is can be updated in the other pages as well
-            sessionStorage.setItem('user', JSON.stringify(user));
-        }
+  <script>
+    /* ─────────── 1. Read URL params ─────────── */
+    const urlParams  = new URLSearchParams(window.location.search);
+    const quizId     = urlParams.get("quizId");     // comes from quiz.js
+    const score      = Number(urlParams.get("score"));
+    const total      = Number(urlParams.get("total"));
+    const percentage = Number(urlParams.get("percentage"));
 
-        // Display results
-        const scoreMessage = document.getElementById("score-message");
+    /* ─────────── 2. Friendly quiz name ───────── */
+    const prettyName = quizId
+      ? quizId.charAt(0).toUpperCase() + quizId.slice(1)
+      : "Quiz";
 
-        if (percentage >= 50) {
-            scoreMessage.textContent = `Congratulations! You scored ${score} out of ${total} (${percentage}%). Great job!`;
-        } else {
-            scoreMessage.textContent = `Almost there! You scored ${score} out of ${total} (${percentage}%). Keep practicing and try again!`;
-            // change the text color to red
-            // this can be changed if you guys think this is too harsh 
-            // @anup, @rista 
-            scoreMessage.style.color = "red";
+    document.getElementById("subject-heading").textContent =
+      `You finished the ${prettyName} Quiz! 🎉`;
 
-        }
+    /* ─────────── 3. Update coins & messages ─── */
+    const scoreMessage = document.getElementById("score-message");
+    scoreMessage.textContent =
+      percentage >= 50
+        ? `Great job! You scored ${score}/${total} (${percentage}%).`
+        : `Keep practicing! You scored ${score}/${total} (${percentage}%).`;
+    if (percentage < 50) scoreMessage.style.color = "red";
 
-        // Display the coins earned
-        const coinsMessage = document.getElementById("coins-message");
-        coinsMessage.textContent = `You earned ${coinsEarned} coins from this quiz!`;
-        coinsMessage.style.color = "#28a745";
-    </script>
+    /* 10 coins per correct answer */
+    const coinsEarned = score * 10;
+    const coinsMessage = document.getElementById("coins-message");
+    coinsMessage.textContent = `You earned ${coinsEarned} coins!`;
+    coinsMessage.style.color = "#28a745";
+
+    /* Persist the new coin balance */
+    const user = JSON.parse(sessionStorage.getItem("user") || "null");
+    if (user) {
+      user.coins = (user.coins || 0) + coinsEarned;
+      sessionStorage.setItem("user", JSON.stringify(user));
+    }
+  </script>
 </body>
 </html>
