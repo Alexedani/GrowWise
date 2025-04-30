@@ -117,6 +117,9 @@
   /* ─── container ─── */
 .controls {
     position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px;                              
     margin-top: 20px;
     min-height: 48px;          /* ensure enough height for absolute children */
   }
@@ -127,10 +130,10 @@
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 1.2rem;
-    border: 2px solid #28a745;
+    border: 2px solid  #087542;
     border-radius: 8px;
     background-color: #e8f5e9;
-    color: #28a745;
+    color: #087542;
     cursor: pointer;
     transition: all 0.3s ease;
   }
@@ -156,7 +159,13 @@
   }
   
   /* center slot: smaller buttons */
-  #confirm-btn,
+/* wide “Submit Answer” button */
+#confirm-btn {
+  grid-column: 1 / -1;  /* stretch across both columns */
+  width: 100%;          /* purely cosmetic – makes sure it’s full width */
+  position: static;     /* overrides the absolute rule inher­ited earlier */
+}
+
   #show-correct-btn {
     left: 46%;
     transform: translateX(-40%);
