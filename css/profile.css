@@ -128,11 +128,12 @@ input {
 }
 
 .avatar-preview {
-  width: 100px;
-  height: 100px;
+  width: 80px; /* Reduced size for better fit */
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
   margin: 10px auto 15px;
+  display: block;
 }
 
 .close-button {
@@ -192,6 +193,38 @@ input {
 .required-asterisk {
   color: red;
   font-weight: bold;
+}
+
+/* Starter icons container */
+.starter-icons-container,
+.owned-icons-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Responsive grid */
+  gap: 10px;
+  justify-items: center;
+  margin: 20px 0;
+}
+
+.starter-icon,
+.owned-icon {
+  width: 60px; /* Reduced size for better fit */
+  height: 60px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.starter-icon:hover,
+.owned-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.starter-icon.selected,
+.owned-icon.selected {
+  border: 3px solid var(--blue);
+  box-shadow: 0 0 15px var(--blue);
+  transform: scale(1.1);
 }
 
 /* stack vertically on very small screens */

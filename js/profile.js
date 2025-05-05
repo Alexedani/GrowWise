@@ -57,35 +57,73 @@ function populateCard() {
 // eidt profile modal
 function openEditCard() {
   $("#edit-modal").classList.remove("hidden");
-  $("#nickname").value     = users[idx].nickname;
-  $("#description").value  = users[idx].description || "";
-  $("#avatar-preview").src = users[idx].avatar      || "";
+  $("#nickname").value = users[idx].nickname;
+  $("#description").value = users[idx].description || "";
+
+  // Populate owned icons (including starter icons)
+  const ownedIconsContainer = $("#ownedIcons");
+  ownedIconsContainer.innerHTML = ""; // Clear previous icons
+  const ownedIcons = users[idx].ownedIcons || [];
+  const starterIcons = [
+    "../images/startericons/happy.png",
+    "../images/startericons/sleeping.png",
+    "../images/startericons/hungry.png",
+    "../images/startericons/laughing.png",
+    "../images/startericons/smirk.png",
+    "../images/startericons/goofy.png",
+    "../images/startericons/angry.png",
+    "../images/startericons/thankful.png",
+    "../images/startericons/tired.png"
+  ];
+
+  [...ownedIcons, ...starterIcons].forEach(iconPath => {
+    const img = document.createElement("img");
+    img.src = iconPath;
+    img.alt = "Owned Icon";
+    img.className = "owned-icon";
+    img.onclick = () => selectOwnedIcon(img);
+    ownedIconsContainer.appendChild(img);
+  });
+
+  // Pre-select the current avatar
+  const currentAvatar = users[idx].avatar;
+  if (currentAvatar) {
+    const currentIcon = Array.from(ownedIconsContainer.children).find(img => img.src === currentAvatar);
+    if (currentIcon) currentIcon.classList.add("selected");
+    $("#editAvatarPreview").src = currentAvatar;
+    $("#editAvatarPreview").classList.remove("hidden");
+  }
 }
+
 function closeEditCard() { $("#edit-modal").classList.add("hidden"); }
 
+function selectOwnedIcon(icon) {
+  // Highlight the selected icon and update the preview
+  document.querySelectorAll(".owned-icon").forEach(img => img.classList.remove("selected"));
+  icon.classList.add("selected");
+  const preview = $("#editAvatarPreview");
+  preview.src = icon.src;
+  preview.classList.remove("hidden");
+}
+
 function saveChanges() {
-  const nickname    = $("#nickname").value.trim();
+  const nickname = $("#nickname").value.trim();
   const description = $("#description").value.trim();
-  const avatarFile  = $("#avatar").files[0];
+  const selectedIcon = document.querySelector(".owned-icon.selected");
 
-  if (nickname)    users[idx].nickname    = nickname;
-  if (description) users[idx].description = description;
-
-  const commit = () => {
-    syncStores();
-    populateCard();   
-    // renderAvatars(users[idx].avatar);
-    closeEditCard();
-    confirmBox("✅ Profile successfully updated.");
-  };
-
-  if (avatarFile) {
-    const r = new FileReader();
-    r.onload = e => { users[idx].avatar = e.target.result; commit(); };
-    r.readAsDataURL(avatarFile);
-  } else {
-    commit();
+  if (!selectedIcon) {
+    showError("#ownedIcons", "#editAvatarErr");
+    return;
   }
+
+  if (nickname) users[idx].nickname = nickname;
+  if (description) users[idx].description = description;
+  users[idx].avatar = selectedIcon.src;
+
+  syncStores();
+  populateCard();
+  closeEditCard();
+  confirmBox("✅ Profile successfully updated.");
 }
 
 /*  CREATE PROFILE (first‑time)  */
@@ -95,22 +133,35 @@ function closeCreateCard() { $("#create-modal").classList.add("hidden"); }
 function saveNewProfile() {
   clearErrors();
 
-  const descVal   = $("#newDescription").value.trim();
-  const avatarSel = $("#newAvatar").files[0];
-  let   ok        = true;
+  const descVal = $("#newDescription").value.trim();
+  const selectedIcon = document.querySelector(".starter-icon.selected");
+  let ok = true;
 
-  if (descVal === "")  { showError("#newDescription", "#descErr");  ok = false; }
-  if (!avatarSel)      { showError("#newAvatar",     "#avatarErr"); ok = false; }
+  if (descVal === "") {
+    showError("#newDescription", "#descErr");
+    ok = false;
+  }
+  if (!selectedIcon) {
+    showError("#starterIcons", "#avatarErr");
+    ok = false;
+  }
   if (!ok) return;
 
-  fileToDataURL(avatarSel, url => {
-    users[idx].description = descVal;
-    users[idx].avatar      = url;
-    syncStores();
-    renderAvatars(url);
-    closeCreateCard();
-    confirmBox("🎉 Profile successfully created!");
-  });
+  const avatarUrl = selectedIcon.src;
+  users[idx].description = descVal;
+  users[idx].avatar = avatarUrl;
+  syncStores();
+  renderAvatars(avatarUrl);
+  closeCreateCard();
+  confirmBox("🎉 Profile successfully created!");
+}
+
+function selectStarterIcon(icon) {
+  // Highlight the selected icon and store its source
+  document.querySelectorAll('.starter-icon').forEach(img => img.classList.remove('selected'));
+  icon.classList.add('selected');
+  const preview = document.getElementById('newAvatarPreview');
+  if (preview) preview.src = icon.src;
 }
 
 function showError(inputSel, errSel) {
@@ -134,4 +185,23 @@ function syncStores() {
     description: users[idx].description,
     avatar:      users[idx].avatar
   }));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize the Edit Profile modal
+    initializeEditProfileModal();
+});
+
+function initializeEditProfileModal() {
+    const ownedIconsContainer = document.getElementById('ownedIcons');
+    if (!ownedIconsContainer) {
+        console.error("Owned icons container not found.");
+        return;
+    }
+
+    // Add event listeners to all hardcoded avatar options
+    const avatarIcons = ownedIconsContainer.querySelectorAll('.starter-icon');
+    avatarIcons.forEach(icon => {
+        icon.addEventListener('click', () => selectStarterIcon(icon));
+    });
 }

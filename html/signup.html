@@ -60,7 +60,7 @@
         return;
       }
 
-      // Check if the email is already registered (using localStorage for dnow)
+      // Check if the email is already registered (using localStorage for now)
       let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
       const existingUser = registeredUsers.find(u => u.email === emailInput.value);
       if (existingUser) {
@@ -69,23 +69,23 @@
       }
 
       // Register the new user
+      const starterIcons = ["../images/startericons/happy.png", "../images/startericons/angry.png", "../images/startericons/goofy.png","../images/startericons/hungry.png", "../images/startericons/laughing.png", "../images/startericons/sleeping.png", "../images/startericons/smirk.png", "../images/startericons/thankful.png", "../images/startericons/tired.png"]; 
       registeredUsers.push({
-       email:       emailInput.value,
-        nickname:    nameInput.value,
+        email: emailInput.value,
+        nickname: nameInput.value,
         description: "",          // ask later
-        avatar:      "",          // ask later
-        coins:       0
+        avatar: "",               // ask later
+        coins: 100,
+        numHints: 0,          
+        ownedItems: starterIcons  // Initialize with starter images
       });
       localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
 
-      
-      sessionStorage.setItem('user', JSON.stringify({
-        email: emailInput.value,
-        nickname: nameInput.value,
-        coins: 0
-      }));
+      // Set the current user in localStorage
+      localStorage.setItem("currentUserEmail", JSON.stringify(emailInput.value));
 
-      window.location.href = 'home.html';
+      window.location.href = '../html/profile.html';
+      alert("Account Created!");
     }
   </script>
 </body>

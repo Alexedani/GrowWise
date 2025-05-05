@@ -95,16 +95,27 @@
       <label for="description">Description</label>
       <input type="text" id="description" name="description" placeholder="Enter description">
 
-      <label for="avatar">Avatar</label>
-      <input type="file" id="avatar" name="avatar" accept="image/*">
-      <img id="avatar-preview" class="avatar-preview" alt="Avatar Preview">
+      <label for="ownedIcons">Choose an Avatar</label>
+      <div id="ownedIcons" class="owned-icons-container">
+        <!-- Hardcoded icons -->
+        <img src="../images/startericons/happy.png" alt="Happy Icon" class="owned-icon starter-icon" onclick="selectOwnedIcon(this)">
+        <img src="../images/startericons/sleeping.png" alt="Sleeping Icon" class="owned-icon starter-icon" onclick="selectOwnedIcon(this)">
+        <img src="../images/startericons/hungry.png" alt="Hungry Icon" class="owned-icon starter-icon" onclick="selectOwnedIcon(this)">
+        <img src="../images/startericons/laughing.png" alt="Laughing Icon" class="owned-icon starter-icon" onclick="selectOwnedIcon(this)">
+        <img src="../images/startericons/smirk.png" alt="Smirk Icon" class="owned-icon starter-icon" onclick="selectOwnedIcon(this)">
+        <img src="../images/startericons/goofy.png" alt="Goofy Icon" class="owned-icon starter-icon" onclick="selectOwnedIcon(this)">
+        <img src="../images/startericons/angry.png" alt="Angry Icon" class="owned-icon starter-icon" onclick="selectOwnedIcon(this)">
+        <img src="../images/startericons/thankful.png" alt="Thankful Icon" class="owned-icon starter-icon" onclick="selectOwnedIcon(this)">
+        <img src="../images/startericons/tired.png" alt="Tired Icon" class="owned-icon starter-icon" onclick="selectOwnedIcon(this)">
+      </div>
+      <img id="editAvatarPreview" class="avatar-preview hidden" alt="Avatar Preview">
+      <span id="editAvatarErr" class="error-msg">Please choose an avatar.</span>
 
       <a href="shop.html" class="customize-button" style="display:block;margin-bottom:12px;">Customize Avatar</a>
 
       <div class="button-group">
         <button type="button" onclick="closeEditCard()">Cancel</button>
         <button type="button" onclick="saveChanges()">Save Changes</button>
-        
       </div>
     </form>
   </div>
@@ -117,15 +128,27 @@
     <form id="create-form">
       <label for="newDescription">
         Description <span class="required-asterisk">*</span>
+      </label>
       <input type="text" id="newDescription" placeholder="Tell us about yourself">
       <span id="descErr" class="error-msg">Please tell us about yourself</span>
 
-      <label for="newAvatar">
-        Avatar <span class="required-asterisk">*</span>
+      <label for="starterIcons">
+        Choose an Avatar <span class="required-asterisk">*</span>
       </label>
-      <input type="file" id="newAvatar" accept="image/*">
-      <img id="newAvatarPreview" class="avatar-preview" alt="Avatar preview">
-      <span id="avatarErr" class="error-msg">Please choose an image.</span>
+      <div id="starterIcons" class="starter-icons-container">
+
+        <img src="../images/startericons/happy.png" alt="Icon 1" class="starter-icon" onclick="selectStarterIcon(this)">
+        <img src="../images/startericons/sleeping.png" alt="Icon 2" class="starter-icon" onclick="selectStarterIcon(this)">
+        <img src="../images/startericons/hungry.png" alt="Icon 3" class="starter-icon" onclick="selectStarterIcon(this)">
+        <img src="../images/startericons/laughing.png" alt="Icon 3" class="starter-icon" onclick="selectStarterIcon(this)">
+        <img src="../images/startericons/smirk.png" alt="Icon 3" class="starter-icon" onclick="selectStarterIcon(this)">
+        <img src="../images/startericons/goofy.png" alt="Icon 3" class="starter-icon" onclick="selectStarterIcon(this)">
+        <img src="../images/startericons/angry.png" alt="Icon 3" class="starter-icon" onclick="selectStarterIcon(this)">
+        <img src="../images/startericons/thankful.png" alt="Icon 3" class="starter-icon" onclick="selectStarterIcon(this)">
+        <img src="../images/startericons/tired.png" alt="Icon 3" class="starter-icon" onclick="selectStarterIcon(this)">
+
+      </div>
+      <span id="avatarErr" class="error-msg">Please choose an avatar.</span>
 
       <div class="button-group">
         <button type="button" onclick="saveNewProfile()">Save</button>
@@ -133,7 +156,40 @@
     </form>
   </div>
 </div>
+<script>
+  function selectStarterIcon(icon) {
+    // Highlight the selected icon and store its source
+    document.querySelectorAll('.starter-icon').forEach(img => img.classList.remove('selected'));
+    icon.classList.add('selected');
+    document.getElementById('newAvatarPreview').src = icon.src;
+  }
 
+  function saveNewProfile() {
+    // Validate inputs (e.g., description and avatar selection)
+    const description = document.getElementById('newDescription').value.trim();
+    const avatarSelected = document.querySelector('.starter-icon.selected');
+
+    if (!description) {
+      document.getElementById('descErr').style.display = 'block';
+      return;
+    }
+    if (!avatarSelected) {
+      document.getElementById('avatarErr').style.display = 'block';
+      return;
+    }
+
+    // Hide the Create Profile Modal
+    document.getElementById('create-modal').classList.add('hidden');
+
+    // Populate the Edit Profile Modal with the new profile data
+    document.getElementById('nickname').value = "New User"; // Default nickname
+    document.getElementById('description').value = description;
+    document.getElementById('avatar-preview').src = avatarSelected.src;
+
+    // Show the Edit Profile Modal
+    document.getElementById('edit-modal').classList.remove('hidden');
+  }
+</script>
 
 <script src="../js/profile.js"></script>
 <script src="../js/main.js"></script>

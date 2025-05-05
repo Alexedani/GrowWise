@@ -236,5 +236,62 @@
     color: #fff;
   }
 
-  
-  
+/* Style for the "Use Hint" button */
+#hint-btn {
+  grid-column: 1 / -1; /* Full width */
+  background-color: #ffc107;
+  color: #333;
+  border: 2px solid #ffc107;
+  transition: all 0.3s ease;
+}
+
+#hint-btn:hover {
+  background-color: #e0a800;
+  color: white;
+}
+
+#hint-btn:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Style for the "Use Hint" button positioned below the quiz box */
+.hint-btn {
+  display: block;
+  margin: 20px auto 0; /* Center below the quiz box */
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #ffc107;
+  color: #333;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hint-btn:hover {
+  background-color: #e0a800;
+  color: white;
+}
+
+.hint-btn:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Hint display container */
+.hint-display {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1.1rem;
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+    text-align: center;
+    display: none; /* Hidden by default */
+}
+
+

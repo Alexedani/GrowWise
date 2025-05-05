@@ -4,25 +4,91 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Shop - GrowWise</title>
-        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="../css/header.css">
+        <link rel="stylesheet" href="../css/shop.css">
         <script src="/js/user.js"></script>
+        <script src="../js/shop.js" defer></script>
     </head>
 <body>
-    <!--Header-->
     <header class="mainHeader">
         <nav class="HeaderNav">
             <a href="home.html"><img src="../images/home.png" alt="home"></a>
-            <a href="settings.html"><img src="../images/settings.png" alt="settings"></a>
-            <a href="profile.html">
+            <!-- <a href="settings.html"><img src="../images/settings.png" alt="settings"></a> -->
+            <a href="#" id="settings-btn">
+                <img src="../images/settings.png" alt="settings">
+            </a>
+            
+            <div id="settings-dropdown" class="settings-dropdown hidden">
+                <!-- Settings Header -->
+                <div class="settings-header">
+                  <strong>Settings</strong>
+                </div>
+              
+                <!-- Audio toggle icon -->
+                <label id="audio-toggle-label">
+                  <img src="../images/audio_off.png" alt="audio off" id="audio-icon">
+                  <span id="audio-status">Audio Off</span>
+                </label>
+                
+                <!-- Logout Option -->
+                <button id="logout-btn" onclick="logoutUser()">Logout</button>
+              </div>
+              
+              <a href="profile.html">
                 <img id="headerAvatar" class="header-avatar"              
                      alt="">
               </a>
         </nav>
-        <h1 class="pageNameLabel">Shop</h1>
-        <label class="coinsLabel" id="coins">Coins: </label>
-        <script src="../js/coinDisplay.js"></script>
+        <h1 class="pageNameLabel">Grow Wise</h1>
+        <span class="coinsLabel">
+            <img src="../images/coin.jpg" alt="coin" class="coin-icon" />
+            <span id="coins">Coins: 0</span> <!-- Default value set to 0 -->
+        </span>
     </header>
     
+    <!-- Shop Layout -->
+    <main class="shopContainer background-image">
+        <!-- Left: Scrollable list of items -->
+        <div class="shopList">
+            <div class="shopItem" onclick="selectItem('hint')">
+                <p>Hint</p>
+                <p>Cost: 100 Coins</p>
+            </div>
+            <div class="shopItem" onclick="selectItem('icon1')">
+                <p>Avacado</p>
+                <p>Cost: 100 Coins</p>
+            </div>
+            <div class="shopItem" onclick="selectItem('icon2')">
+                <p>Crown</p>
+                <p>Cost: 200 Coins</p>
+            </div>
+            <div class="shopItem" onclick="selectItem('icon3')">
+                <p>Butterfly</p>
+                <p>Cost: 200 Coins</p>
+            </div>
+            <div class="shopItem" onclick="selectItem('icon4')">
+                <p>Frog</p>
+                <p>Cost: 150 Coins</p>
+            </div>
+            <div class="shopItem" onclick="selectItem('icon5')">
+                <p>Dog</p>
+                <p>Cost: 50 Coins</p>
+            </div>
+        </div>
+
+        <!-- Right: Item detail view -->
+        <div class="shopDetail card">
+            <div class="shopDetailContent">
+                <h2 id="itemName">Select an item</h2>
+                <img id="itemImage" src="" alt="Item Preview" class="itemImage">
+                <p id="itemDescription">Details about the selected item will appear here.</p>
+                <button id="purchaseButton" class="btn" disabled>Purchase</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <!--<script src="../js/coinDisplay.js"></script>-->
     
 </body>
 </html>

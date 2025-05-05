@@ -56,8 +56,9 @@
 
     /* Persist the new coin balance */
     const user = JSON.parse(sessionStorage.getItem("user") || "null");
-    if (user) {
+    if (user && !user.coinsUpdated) { // Ensure coins are updated only once
       user.coins = (user.coins || 0) + coinsEarned;
+      user.coinsUpdated = true; // Mark coins as updated
       sessionStorage.setItem("user", JSON.stringify(user));
     }
   </script>
