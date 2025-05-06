@@ -131,37 +131,39 @@ function openCreateCard()  { $("#create-modal").classList.remove("hidden"); }
 function closeCreateCard() { $("#create-modal").classList.add("hidden"); }
 
 function saveNewProfile() {
-  clearErrors();
+    clearErrors();
 
-  const descVal = $("#newDescription").value.trim();
-  const selectedIcon = document.querySelector(".starter-icon.selected");
-  let ok = true;
+    const description = document.getElementById('newDescription').value.trim();
+    const selectedIcon = document.querySelector('.starter-icon.selected');
 
-  if (descVal === "") {
-    showError("#newDescription", "#descErr");
-    ok = false;
-  }
-  if (!selectedIcon) {
-    showError("#starterIcons", "#avatarErr");
-    ok = false;
-  }
-  if (!ok) return;
+    if (!description) {
+        document.getElementById('descErr').style.display = 'block';
+        return;
+    }
+    if (!selectedIcon) {
+        document.getElementById('avatarErr').style.display = 'block';
+        return;
+    }
 
-  const avatarUrl = selectedIcon.src;
-  users[idx].description = descVal;
-  users[idx].avatar = avatarUrl;
-  syncStores();
-  renderAvatars(avatarUrl);
-  closeCreateCard();
-  confirmBox("🎉 Profile successfully created!");
+    // Save profile data and close modal
+    const avatarUrl = selectedIcon.src;
+    users[idx].description = description;
+    users[idx].avatar = avatarUrl;
+    syncStores();
+    renderAvatars(avatarUrl);
+    document.getElementById('create-modal').classList.add('hidden');
+    confirmBox("🎉 Profile successfully created!");
 }
 
 function selectStarterIcon(icon) {
-  // Highlight the selected icon and store its source
-  document.querySelectorAll('.starter-icon').forEach(img => img.classList.remove('selected'));
-  icon.classList.add('selected');
-  const preview = document.getElementById('newAvatarPreview');
-  if (preview) preview.src = icon.src;
+    // Highlight the selected icon and update the preview
+    document.querySelectorAll('.starter-icon').forEach(img => img.classList.remove('selected'));
+    icon.classList.add('selected');
+    const preview = document.getElementById('newAvatarPreview');
+    if (preview) {
+        preview.src = icon.src;
+        preview.classList.remove('hidden'); // Ensure the preview is visible
+    }
 }
 
 function showError(inputSel, errSel) {
@@ -190,6 +192,12 @@ function syncStores() {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize the Edit Profile modal
     initializeEditProfileModal();
+
+    // Add event listeners to starter icons in the Create Profile modal
+    const starterIcons = document.querySelectorAll('.starter-icon');
+    starterIcons.forEach(icon => {
+        icon.addEventListener('click', () => selectStarterIcon(icon));
+    });
 });
 
 function initializeEditProfileModal() {

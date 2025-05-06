@@ -203,3 +203,77 @@ body {
         height: auto;
     }
 }
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #555;
+}
+
+.modal-content .close-button:hover {
+    color: #000;
+}
+
+/* YouTube video section styles */
+.videos {
+    background-color: #FFFAE5;
+    border: 2px solid #FFD700;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.videos h2 {
+    font-size: 2em;
+    color: #FF8C00;
+    margin-bottom: 20px;
+}
+
+.videos iframe {
+    border: 2px solid #FF8C00;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    margin: 0 auto;
+    display: block;
+}
+
+.videos iframe:hover {
+    transform: scale(1.05);
+}

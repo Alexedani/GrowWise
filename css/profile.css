@@ -66,8 +66,9 @@ input {
   backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   z-index: 9999;
+  overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 .modal-overlay.hidden {
@@ -77,12 +78,12 @@ input {
 .edit-card {
   background: #fff;
   border-radius: var(--radius);
-  padding: 30px;
+  padding: 20px; /* Reduced padding for smaller screens */
   width: 90%;
-  max-width: 400px;
+  max-width: 350px; /* Reduced max width to fit smaller screens */
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   position: relative;
-  margin-top: 60px;
+  margin: 20px 0; /* Prevent sticking to edges */
 }
 
 .edit-card h2 {
@@ -196,7 +197,33 @@ input {
 }
 
 /* Starter icons container */
-.starter-icons-container,
+.starter-icons-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); /* Adjusted for smaller icons */
+  gap: 10px;
+  justify-items: center;
+  margin: 20px 0;
+}
+
+.starter-icon {
+  width: 50px; /* Reduced size for better fit */
+  height: 50px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.starter-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.starter-icon.selected {
+  border: 3px solid var(--blue);
+  box-shadow: 0 0 15px var(--blue);
+  transform: scale(1.1);
+}
+
 .owned-icons-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Responsive grid */
@@ -205,7 +232,6 @@ input {
   margin: 20px 0;
 }
 
-.starter-icon,
 .owned-icon {
   width: 60px; /* Reduced size for better fit */
   height: 60px;
@@ -214,13 +240,11 @@ input {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.starter-icon:hover,
 .owned-icon:hover {
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.starter-icon.selected,
 .owned-icon.selected {
   border: 3px solid var(--blue);
   box-shadow: 0 0 15px var(--blue);

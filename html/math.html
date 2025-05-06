@@ -1,43 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Math Wizards</title>
-  <link rel="stylesheet" href="../css/header.css" />
-  <link rel="stylesheet" href="../css/main.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Lesson</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .lesson-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .intro-section, .math-section, .real-world-section {
+            background-color: #FFFAE5;
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-section h2, .math-section h2, .real-world-section h2 {
+            font-size: 2em;
+            color: #FF8C00;
+            margin-bottom: 10px;
+        }
+
+        .intro-section p, .math-section p, .real-world-section p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .math-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            justify-items: center;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .math-card {
+            background-color: #FFDDC1;
+            border: 2px solid #FF8C00;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .math-card:hover {
+            transform: scale(1.1);
+            background-color: #FFD700;
+        }
+
+        .real-world-examples {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .real-world-example {
+            background-color: #FFDDC1;
+            border: 2px solid #FF8C00;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .real-world-example img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .nav-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #FF8C00;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #FF4500;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="mainHeader">
-    <nav class="HeaderNav">
-      <a href="home.html"><img src="../images/home.png" alt="Home" /></a>
-      <a href="#" id="settings-btn">
-        <img src="../images/settings.png" alt="Settings" />
-      </a>
-      <div id="settings-dropdown" class="settings-dropdown hidden">
-        <div class="settings-header"><strong>Settings</strong></div>
-        <label id="audio-toggle-label">
-          <img src="../images/audio_off.png" alt="Audio Off" id="audio-icon" />
-          <span id="audio-status">Audio Off</span>
-        </label>
-      </div>
-      <a href="profile.html">
-        <img id="headerAvatar" class="header-avatar"              
-             alt="">
-      </a>
-      <a href="learn.html" class="back-link">
-        <img src="../images/back.jpg" alt="Back to Learn" />
-        <span>Back</span>
-      </a>
-    </nav>
-    <h1 class="pageNameLabel">Let's Learn Mathematics</h1>
-    <span class="coinsLabel"><img src="../images/coin.jpg" alt="coin" class="coin-icon" /><span id="coins">Coins: </span></span>
-    <script src="../js/coinDisplay.js"></script>
-  </header>
+    <!-- Navbar -->
+    <header class="mainHeader">
+        <nav class="HeaderNav">
+            <a href="home.html"><img src="../images/home.png" alt="Home" /></a>
+            <a href="#" id="settings-btn">
+                <img src="../images/settings.png" alt="Settings" />
+            </a>
+            <div id="settings-dropdown" class="settings-dropdown hidden">
+                <div class="settings-header"><strong>Settings</strong></div>
+                <label id="audio-toggle-label">
+                    <img src="../images/audio_off.png" alt="Audio Off" id="audio-icon" />
+                    <span id="audio-status">Audio Off</span>
+                </label>
+            </div>
+            <a href="profile.html"><img src="../images/profile.png" alt="Profile" /></a>
+            <a href="learn.html" class="back-link">
+                <img src="../images/back.jpg" alt="Back to Learn" />
+                <span>Back</span>
+            </a>
+        </nav>
+        <h1 class="pageNameLabel">Learn Basic Math</h1>
+        <label class="coinsLabel" id="coins">Coins: </label>
+        <script src="../js/coinDisplay.js"></script>
+    </header>
 
-  
-  <script src="../js/main.js"></script>
-  <script src="../js/coinDisplay.js"></script>
+    <!-- Introduction Section -->
+    <div class="intro-section">
+        <h2>Welcome to the World of Numbers!</h2>
+        <p>Math is fun and exciting! Let's explore numbers, addition, subtraction, and real-world applications of math.</p>
+    </div>
+
+    <!-- Basic Math Section -->
+    <div class="math-section">
+        <h2>Basic Math</h2>
+        <p>Click on a card to learn about addition or subtraction!</p>
+        <div class="math-grid">
+            <!-- Addition Card -->
+            <a href="https://www.youtube.com/watch?v=pxUY29LpMZE" target="_blank" class="math-card">
+                <h3>Addition</h3>
+                <p>Learn how to add numbers together!</p>
+            </a>
+
+            <!-- Subtraction Card -->
+            <a href="https://www.youtube.com/watch?v=ug0gs8kLE48" target="_blank" class="math-card">
+                <h3>Subtraction</h3>
+                <p>Learn how to subtract numbers!</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Real-World Applications Section -->
+    <div class="real-world-section">
+        <h2>Real-World Applications</h2>
+        <p>Math is everywhere! Here are some examples of how we use math in our daily lives:</p>
+        <div class="real-world-examples">
+            <div class="real-world-example">
+                <img src="../images/clerk.jpg" alt="Shopping">
+                <p>Shopping: Add up prices to find the total cost.</p>
+            </div>
+            <div class="real-world-example">
+                <img src="../images/clock.jpg" alt="Clock">
+                <p>Time: Use math to read and calculate time.</p>
+            </div>
+            <div class="real-world-example">
+                <img src="../images/cooking.jpg" alt="Cooking">
+                <p>Cooking: Measure ingredients for recipes.</p>
+            </div>
+            <div class="real-world-example">
+                <img src="../images/measuring.jpeg" alt="Building">
+                <p>Building: Use math to measure and construct.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- YouTube Video Section -->
+    <div class="videos">
+        <h2>Watch and Learn!</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/FJ3-vmKLizA" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- Navigation Button -->
+    <div class="nav-buttons">
+        <a href="learn.html">Back to Learn</a>
+    </div>
+
+    <!-- Addition Modal -->
+    <div id="additionModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeAdditionModal()">×</span>
+            <h2>Practice Addition</h2>
+            <p id="additionQuestion">What is 2 + 3?</p>
+            <input type="number" id="additionAnswer" placeholder="Enter your answer">
+            <button onclick="checkAdditionAnswer()">Submit</button>
+            <p id="additionFeedback"></p>
+        </div>
+    </div>
+
+    <!-- Subtraction Modal -->
+    <div id="subtractionModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeSubtractionModal()">×</span>
+            <h2>Practice Subtraction</h2>
+            <p id="subtractionQuestion">What is 5 - 2?</p>
+            <input type="number" id="subtractionAnswer" placeholder="Enter your answer">
+            <button onclick="checkSubtractionAnswer()">Submit</button>
+            <p id="subtractionFeedback"></p>
+        </div>
+    </div>
+
+    <script src="../js/mathLesson.js"></script>
+    <script>
+        function showMathActivity(activity) {
+            alert(`You selected: ${activity}. This feature will be interactive in the future!`);
+        }
+    </script>
 </body>
 </html>
