@@ -1,17 +1,20 @@
 # GrowWise
 
+**Team Members:**
 - Alex Daniluc
 - Anup Majumder
 - Rista Baral
-- Chris Schultz 
 
 ## Features
+- Learn
+- Grow
+- Shop
 
 ## How to run
 1. **Clone the Repository:**
    ```bash
-git clone https://github.com/Alexedani/GrowWise.git
-cd <project-directory>
+   git clone https://github.com/Alexedani/GrowWise.git
+   cd <project-directory>
 
 2. **Open the Project:**
  - Locate the index.html file in the project directory.
